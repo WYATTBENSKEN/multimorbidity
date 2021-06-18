@@ -16,13 +16,15 @@ have been developed by other researchers and are detailed in depth
 below.
 
 This package is meant to be both user-friendly and transparent. An
-individual should feel comofortably understanding what’s ‘under the
-hood’ with these various metrics and the functions are written in a way
-that makes this possible.
+individual should feel comfortably understanding what’s ‘under the hood’
+with these various metrics and the functions are written in a way that
+makes this possible.
 
-**WARNING** This package is currently under development. Code contianed
-on this site may not have been robustly tested and it is not recommended
-to use any of this code at present.
+# Warning and Notice
+
+This package is currently under development. Code contained on this site
+may not have been robustly tested and it is not recommended to use any
+of this code while this warning remains.
 
 ## Installation
 

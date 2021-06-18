@@ -1,0 +1,29 @@
+Package: multimorbidity
+Title: Creation of Various Multimorbidity Measures
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Wyatt",
+           family = "Bensken",
+           role = c("aut", "cre"),
+           email = "wpb27@case.edu",
+           comment = c(ORCID = "0000-0002-2597-9732"))
+Description: This package aims to make simple the often duplicative process of implementing
+    various comorbidty and multimorbidty measures to claims and other administrative data.
+    The functions contained in this package are meant to first prepare the data to a format
+    acceptable by all other packages, then provide a uniform and simple approach to
+    generate comorbidity and multimorbidity metrics based on these claims data. The package
+    is ever evolving to include new metrics.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    tidyverse,
+    dplyr,
+    lubridate,
+    magrittr,
+    stringr,
+    rlang,
+    tidyselect,
+    tidyr

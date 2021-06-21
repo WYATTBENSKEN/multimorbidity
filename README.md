@@ -20,7 +20,7 @@ individual should feel comfortably understanding what’s ‘under the hood’
 with these various metrics and the functions are written in a way that
 makes this possible.
 
-# Warning and Notice
+## Warning and Notice
 
 This package is currently under development. Code contained on this site
 may not have been robustly tested and it is not recommended to use any
@@ -37,3 +37,31 @@ The development version can be downloaded from
 # install.packages("devtools")
 devtools::install_github("WYATTBENSKEN/multimorbidity")
 ```
+
+## Citation Information
+
+In addition to citing this R Package, we ask that you please cite the
+original manuscripts which developed these algorithms.
+
+## Included Algorithms and Indices
+
+### Elixhauser Comorbidity Index
+
+The Elixhauser Comorbidities and Comorbidity Index are a widely-used set
+of comorbidities originally developed in
+[1998](https://pubmed.ncbi.nlm.nih.gov/9431328/), with two indices for
+mortality and readmission created in
+[2017](https://pubmed.ncbi.nlm.nih.gov/28498196/).
+
+In this package, we used the codes provided in the format programs by
+the Agency for Healthcare Research and Quality for
+[ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidity/comorbidity.jsp),
+[ICD-10
+Beta](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10_archive.jsp),
+and
+[ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp).
+The ICD-10 data contain a larger set of comorbidities and, as of this
+writing, no calculator for the indices has been released, and thus when
+data contain both ICD-9 and ICD-10, we will use the ICD-9 comorbidities
+with the Beta code. Finally, the original algorithm takes into account
+DRG, which this package currently does not accomodate.

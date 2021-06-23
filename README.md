@@ -52,7 +52,7 @@ adapted from another package,
 
 The Elixhauser Comorbidities and Comorbidity Index are a widely-used set
 of comorbidities originally developed in 1998 by
-Elixhauser(<https://pubmed.ncbi.nlm.nih.gov/9431328/>), with two indices
+[Elixhauser](https://pubmed.ncbi.nlm.nih.gov/9431328/), with two indices
 for mortality and readmission created in 2017 by [Moore et
 al.](https://pubmed.ncbi.nlm.nih.gov/28498196/).
 

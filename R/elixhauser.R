@@ -14,9 +14,10 @@
 #' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
 #'     ICD-10 (10)
 #' @param outpatient_two whether or not it should be required for there to be two outpatient
-#'     claims for a diagnosis for a patient to be positvely coded with that diagnosis.
+#'     claims for a diagnosis for a patient to be positively coded with that diagnosis.
 #'
 #'   @importFrom rlang .data
+#'   @export
 
 elixhauser <- function(dat = NULL,
                        id = NULL,
@@ -1524,7 +1525,7 @@ elixhauser <- function(dat = NULL,
                       paralysis = dplyr::if_else(({{version_var}} ==  9 & (dx %in% paralysis9 | stringr::str_starts(dx, paste(paralysis9_str, collapse = "|")))) |
                                                    ({{version_var}} ==  10 & dx %in% paralysis10beta),
                                                  1, 0),
-                      neuro = dplyr::if_else(({{version_var}} ==  9 & dx %in% neuro9 | stringr::str_starts(dx, paste(neuro9_str, collapse = "|"))) |
+                      neuro = dplyr::if_else(({{version_var}} ==  9 & (dx %in% neuro9 | stringr::str_starts(dx, paste(neuro9_str, collapse = "|")))) |
                                                ({{version_var}} ==  10 & dx %in% neuro10beta),
                                              1, 0),
                       chronic_pulm = dplyr::if_else(({{version_var}} ==  9 & (dx %in% chronic_pulm9 | stringr::str_starts(dx, paste(chronic_pulm9_str, collapse = "|")))) |
@@ -2083,7 +2084,7 @@ elixhauser <- function(dat = NULL,
         elix_valve = max(.data$elix_valve),
         elix_weightloss = max(.data$elix_weightloss)) %>%
       dplyr::ungroup()
-    # Currently (2021-06-16) there are no weights available for ICD-10.
+    message("Currently (2021-06-16) there are no weights available for ICD-10.")
 
   }
 
@@ -2093,3 +2094,5 @@ elixhauser <- function(dat = NULL,
   return(dat4)
 
 }
+
+#' @export

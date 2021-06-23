@@ -26,6 +26,11 @@ Imports:
     stringr,
     rlang,
     tidyselect,
-    tidyr
+    tidyr,
+    devtools
 URL: https://github.com/WYATTBENSKEN/multimorbidity
 BugReports: https://github.com/WYATTBENSKEN/multimorbidity/issues
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

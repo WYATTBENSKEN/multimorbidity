@@ -18,6 +18,7 @@
 #' @param date variable with the date of the claim
 #'
 #' @importFrom rlang .data
+#' @export
 
 prepare_data <- function(dat = NULL,
                          id = NULL,
@@ -44,7 +45,7 @@ prepare_data <- function(dat = NULL,
 
     if (hcpcs == "yes" | hcpcs == "Yes"){
       dat_hcpcs <- tidyr::pivot_longer(dat, dplyr::starts_with(prefix_hcpcs), values_to = "dx")
-      var2 <- c(id2, date2, "dx")
+      var2 <- c(id2, date2, "dx", type2)
       dat_hcpcs <- dat_hcpcs[tidyselect::all_of(var2)]
       dat_hcpcs <- dplyr::rename(dat_hcpcs, "claim_date" = date2)
       dat_hcpcs <- dplyr::rename(dat_hcpcs, "type" = type2)

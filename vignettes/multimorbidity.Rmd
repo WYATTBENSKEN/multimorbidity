@@ -1,0 +1,129 @@
+---
+title: "Working with the Multimorbidity Package"
+author: "Wyatt P. Bensken"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with the Multimorbidity Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
+  % \VignetteDepends{devtools}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include = FALSE}
+
+devtools::load_all(".")
+library(tidyverse)
+
+```
+
+# Introduction
+
+The multimorbidity package is a simple and transparent one-stop-shop for those working with claims or other administrative health care data who wish to obtain comorbidity, frailty, and/or multimorbidity measures. The goal of the package is to first clean and organize the data in a way that can then be easily used for various algorithms in a uniform and standard format.
+
+# Readin Sample Data
+
+We've created two sample datasets.
+
+## Claims Data
+
+This features 5 hypothetical patients and hypothetical claims across ICD-9 and ICD-10.
+
+```{r, include = FALSE}
+claims <- i9_i10_comb
+```
+
+
+```{r, echo = FALSE}
+head(claims, 10)
+```
+
+## ID Data
+
+This is our one-row-per-patient dataset which is only needed if we intend to use the function to limit our time window (`comorbidity_window`).
+
+
+```{r, include = FALSE}
+id <- multimorbidity::id
+```
+
+```{r, echo = FALSE}
+head(id, 5)
+```
+
+# Preparing the Data
+
+The first step is to "prepare" our data for the subsequent algorithms. The end-goal is to have a dataset that has 1 column with a patient ID,  1 column which contains the diagnosis code, and 1 column which will note if it's ICD-9 (9) or ICD-10 (10). There are other variables that may be of interest depending on the specification including type (inpatient or outpatient) and date.
+
+The arguments used here are (in order): telling it the name of our data, specifying the ID variable, noting if it's wide or long (long would be if the data is in our final format), the prefix for the diagnosis columns (dx1, dx2, dx3 would be "dx"), noting if our data include a HCPCS/CPT column, specifying the variable which notes if it's ICD-9 or ICD-10, specifying the variable which tells us the type of visit (inpatient or outpatient), and finally specfying which column is the date.
+
+```{r}
+prepared_data <- prepare_data(dat = claims,
+                              id = patient_id,
+                              style = "wide",
+                              prefix_dx = "dx",
+                              hcpcs = "yes",
+                              prefix_hcpcs = "hcpcs", 
+                              version_var = icd_version,
+                              type_name = visit_type,
+                              date = date_of_serv)
+```
+
+```{r, echo = FALSE}
+head(prepared_data, 10)
+```
+
+# Setting Comorbidity Window
+
+Oftentimes, we may be interested in limiting our claims to a specific window, such as the 1-year before diagnosis. To accommodate this, this package includes a function which will merge datasets and limit the claims to that window.
+
+In the example below we do the following: tell it the name of our ID dataset, the name of our claims data, specify our mutual ID variable, specify the variable name in the ID dataset which is our "date of interest", specify the variable in the claims data which is our date of the claim, and specify the time window (in this example, pre only) we are interested in. There is a complementary argument for post (time_post), which is set to infinity as the default. In this example we are only taking the claims that occur within the 60 days before our date of interest as well as all claims after our date of interest. A common extension on this would be if we were interested in only those claims that occured before diagnosis. This case we could ignore the time_pre argument and set time_post = 0. 
+
+
+Note: in this example we ignore date_of_interest10 but this could be used instead as we include both ICD-9 and ICD-10 claims and dates.
+
+```{r}
+limit_data <- comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id, 
+                                 id_date = date_of_interest9, claims_date = claim_date,
+                                 time_pre = 60)
+```
+
+```{r, echo = FALSE}
+head(limit_data, 10)
+```
+
+# Running Indices
+
+The real advantage of this package is now that we have our data in a standard format, we are able to apply a multitude of comorbidity indices to these following a near-identical format. More information about these indices can be found in the package documentation, and the code below just demonstrates how to execute them.
+
+The arguments are similar and include: the dataset name, the variable of our patient ID, the variable of our diagnoses, the version (9 = ICD-9 only, 10 = ICD-10 only, and 19 = both), the variable which specifies the version of that diagnosis code (9 or 10), and whether or not we want to require there to be two outpatient visits for an individual to be positively coded with a comorbidity. While not frequently used, this adaptation may limit rule-out diagnoses and the package was built with this flexibility in mind.
+
+## Elixhauser Comorbidity Index
+
+```{r}
+elix_data <- elixhauser(dat = limit_data, id = patient_id, dx = dx, version = 19, version_var = version, outpatient_two = "yes")
+```
+
+```{r, echo = FALSE}
+head(elix_data, 5)
+```
+
+
+## Charlson Comorbidity Index
+
+```{r}
+charlson_data <- charlson(dat = limit_data, id = patient_id, dx = dx, version = 19, version_var = version, outpatient_two = "yes")
+```
+
+```{r, echo = FALSE}
+head(charlson_data, 5)
+```
+

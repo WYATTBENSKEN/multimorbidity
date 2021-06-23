@@ -13,6 +13,8 @@
 #' @param time_pre number to limit how many days, pre diagnosis, should be included. Default will be
 #'    infinity (all claims)
 #' @param time_post similar to time_pre, but this will be after the date of interest
+#'
+#' @export
 
 comorbidity_window <- function(dat = NULL,
                                id_dat = NULL,
@@ -39,4 +41,8 @@ comorbidity_window <- function(dat = NULL,
     df2 <- dplyr::filter(df1, (as.numeric({{ id_date }} - {{ claims_date }} ) <= time_pre) &
                     (as.numeric( {{ claims_date }} - {{ id_date }} ) <= time_post)) # finally, we limit to our comorbidity window
 
-    return(df2) } }
+    return(df2) }
+
+  }
+
+#' @export

@@ -28,7 +28,7 @@ of this code while this warning remains.
 
 ## Installation
 
-There is currently no released version of `multimorbidty` on CRAN.
+There is currently no released version of `multimorbidity` on CRAN.
 
 The development version can be downloaded from
 [GitHub](https://github.com/) with:
@@ -54,7 +54,7 @@ The Elixhauser Comorbidities and Comorbidity Index are a widely-used set
 of comorbidities originally developed in 1998 by
 [Elixhauser](https://pubmed.ncbi.nlm.nih.gov/9431328/), with two indices
 for mortality and readmission created in 2017 by [Moore et
-al.](https://pubmed.ncbi.nlm.nih.gov/28498196/).
+al.](https://pubmed.ncbi.nlm.nih.gov/28498196/)
 
 In this package, we used the codes provided in the format programs by
 the Agency for Healthcare Research and Quality for

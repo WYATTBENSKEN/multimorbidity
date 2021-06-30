@@ -29,7 +29,7 @@ This package is currently under development. Code contained on this site may not
 
 ## Installation
 
-There is currently no released version of `multimorbidty` on CRAN.
+There is currently no released version of `multimorbidity` on CRAN.
 
 The development version can be downloaded from [GitHub](https://github.com/) with:
 
@@ -46,7 +46,7 @@ In addition to citing this R Package, we ask that you please cite the original m
 
 ### Elixhauser Comorbidities and Index
 
-The Elixhauser Comorbidities and Comorbidity Index are a widely-used set of comorbidities originally developed in 1998 by [Elixhauser](https://pubmed.ncbi.nlm.nih.gov/9431328/), with two indices for mortality and readmission created in 2017 by [Moore et al.](https://pubmed.ncbi.nlm.nih.gov/28498196/).
+The Elixhauser Comorbidities and Comorbidity Index are a widely-used set of comorbidities originally developed in 1998 by [Elixhauser](https://pubmed.ncbi.nlm.nih.gov/9431328/), with two indices for mortality and readmission created in 2017 by [Moore et al.](https://pubmed.ncbi.nlm.nih.gov/28498196/)
 
 In this package, we used the codes provided in the format programs by the Agency for Healthcare Research and Quality for [ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidity/comorbidity.jsp), [ICD-10 Beta](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10_archive.jsp), and [ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp). The ICD-10 data contain a larger set of comorbidities and, as of this writing, no calculator for the indices has been released, and thus when data contain both ICD-9 and ICD-10, we will use the ICD-9 comorbidities with the Beta code. Finally, the original algorithm takes into account DRG, which this package currently does not accommodate.
 

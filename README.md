@@ -78,3 +78,15 @@ number of times. This algorithm employs the [Deyo et
 al.](https://pubmed.ncbi.nlm.nih.gov/1607900/) list of 17 comorbidities,
 with the adaptations included in [Quan et
 al.](https://pubmed.ncbi.nlm.nih.gov/16224307/)
+
+### Claims Frailty Index
+
+The Claims Frailty Index (CFI) is based off of work by [Kim et
+al.](https://pubmed.ncbi.nlm.nih.gov/29244057/) in 2018. This algorithm
+uses ICD-9, ICD-10, and procedure codes to establish the frailty score
+for each patient. The code included in this package is largely developed
+from publicly-available code which can be found on the [Harvard
+dataverse](https://dataverse.harvard.edu/dataverse/cfi). As the original
+algorithms included procedure codes, so does this algorithm. Currently
+(2021-07-06), this algorithm cannot be run without procedure codes,
+however this may be a choice in future releases.

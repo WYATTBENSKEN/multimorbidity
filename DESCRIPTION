@@ -27,10 +27,14 @@ Imports:
     rlang,
     tidyselect,
     tidyr,
-    devtools
+    devtools,
+    sqldf,
+    stats
 URL: https://github.com/WYATTBENSKEN/multimorbidity
 BugReports: https://github.com/WYATTBENSKEN/multimorbidity/issues
 Suggests: 
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

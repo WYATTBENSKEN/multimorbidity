@@ -1,0 +1,192 @@
+#' Claims-based Frailty Index (CFI)
+#'
+#' \code{cfi} returns a summary dataset containing the deficit-accumulation frailty index
+#'     for each patient.
+#'
+#' This function uses data which has been properly prepared to calculate the claims-based frailty index (CFI) developed by Kim et al. for each patient.
+#'     As this algorithm was never developed to require two diagnosis codes, and is weighted, we have excluded that feature from this function.
+#'     See full package documentation for additional details. This function is based largely on the code available via the [Harvard Dataverse](https://dataverse.harvard.edu/dataverse/cfi).
+#'
+#' @param dat dataset which has been properly prepared using 'prepare_data()'
+#' @param id variable of the unique patient identifier
+#' @param dx the column with the diagnoses and procedures (defaults to 'dx')
+#' @param version which version(s) of ICD your data contain (ICD-9 only: 9, ICD-10 only: 10,
+#'     Both: 19)
+#' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
+#'     ICD-10 (10)
+#'
+#'   @importFrom rlang .data
+#'   @importFrom stats
+#'   @importFrom aggregate
+#'   @export
+
+cfi <- function(dat = NULL,
+                id = NULL,
+                dx = "dx",
+                version = 19,
+                version_var = NULL){
+
+
+  id2 <- rlang::quo_name(rlang::enquo(id))
+  ModelIntercept = 0.10288
+
+  # Readin Data ----
+
+  dx9lookup <- multimorbidity::cfi_dx9lookup
+  dx10lookup <- multimorbidity::cfi_dx10lookup
+  pxlookup <- multimorbidity::cfi_pxlookup
+  weightlookup <- multimorbidity::cfi_weightlookup
+
+  # Deduplicate files ----
+    # As each diagnosis is only used once, we can start by de-duplicating the diagnoses
+
+  dat1 <- unique(dat)
+
+  # CFI ICD-9 ----
+
+  # TO DO ----
+  # 1. Convert Dx to Numeric
+  # 2. Check DX column name
+
+  if (version == 9){
+
+    lookup_dx9disease <- function(data, lookup)
+    {data <- sqldf::sqldf("select A.*, B.disease_number from
+                 data A left join lookup B
+                 ON (A.dx >= B.start and A.dx < B.stop)")
+    }
+
+    dat1_9 <- dat1 %>%
+      dplyr::filter(version_var == 9)
+
+    dat_dx9 <- lookup_dx9disease(dat1_9, lookup=dx9lookup)
+    dat_dx9[is.na(dat_dx9)] <- 0
+
+  }
+
+  # CFI - ICD-10 ----
+
+  else if (version == 10){
+
+    dat1_10 <- dat1 %>%
+      dplyr::filter(version_var == 10)
+
+    dat_dx10 <- merge(dat1_10, dx10lookup, all.x=TRUE)
+    dat_dx10[is.na(dat_dx10)] <- 0
+    dat_dx10 <- dat_dx10[order(dat_dx10$patid,dat_dx10$dx),]
+
+
+  }
+
+
+  # CFI - ICD-9 and ICD-10 ----
+
+  else if (version == 19){
+    dat1_9 <- dat1 %>%
+      dplyr::filter(version_var == 9)
+    dat1_10 <- dat1 %>%
+      dplyr::filter(version_var == 10)
+
+    dat_dx9 <- lookup_dx9disease(dat1_9, lookup=dx9lookup)
+    dat_dx9[is.na(dat_dx9)] <- 0
+
+    dat_dx10 <- unique(dat1_10)
+    dat_dx10 <- merge(dat_dx10, dx10lookup, all.x=TRUE)
+    dat_dx10[is.na(dat_dx10)] <- 0
+    dat_dx10 <- dat_dx10[order(dat_dx10$patid,dat_dx10$dx),]
+
+  }
+
+
+  # CFI - Procedure Codes ----
+
+  lookup_pxdisease <- function(data, lookup)
+  {
+
+  data <- sqldf::sqldf("select A.*, B.disease_number from
+                 data A left join lookup B
+                 ON (A.px >= B.start and A.px <= B.stop)")
+
+    }
+
+  dat1_px <- dat1 %>%
+    dplyr::filter(version_var == 2)
+
+  dat1_px <- unique(dat1_px)
+  dat_px <- lookup_pxdisease(dat1_px, lookup=pxlookup)
+  dat_px[is.na(dat_px)] <- 0
+  # If a PX value isn't 5 characters or if last character
+  # isn't a number, PX should not be scored. Set to 0.
+  dat_px <- within(dat_px, disease_number[nchar(dx) != 5 | grepl("[0-9]", substr(dx, nchar(dx), nchar(dx))) == FALSE] <- 0)
+
+  # Assign dummy disease_number = 0 for all study IDs. This will have the effect of assigning the ----
+  # default weight (ModelIntercept) for any PatID that is not included in the DX9, DX10 or PX file
+
+  iddata <- dat1 %>%
+    dplyr::select(id)
+
+  iddata <- unique(iddata)
+  iddata['disease_number'] = 0
+
+
+  # Remove duplicates. Each DX/PX should only be weighted once. ----
+  if (version == 9){
+
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx9, dat_px, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  else if (version == 10){
+
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx10, dat_px, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  else if (version == 19){
+
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx9, dat_dx10, dat_px, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  diseasedata <- unique(diseasedata)
+  diseasedatasort <- diseasedata[order(diseasedata$patid,diseasedata$disease_number),]
+
+  # Assign weights ----
+  # Merge the disease weights on to the disease data and fill non-matches (NA) with 0
+  diseasedatasort <- merge(diseasedatasort, weightlookup, all.x=TRUE)
+  diseasedatasort[is.na(diseasedatasort)] <- 0
+  diseasedatasort <- diseasedatasort[order(diseasedatasort$patid,diseasedatasort$disease_number),]
+
+  # Calculate frailty scores by summing the weights of records grouped by patient ID. ----
+  # ModelIntercept value added to every score. Default score for those with no DX/PX.
+  scores <- stats::aggregate(diseasedatasort$weight, by=list(patid=diseasedatasort$patid), FUN=sum)
+  scores$x <- scores$x + ModelIntercept
+  colnames(scores) <- c(id, 'frailty_index')
+
+  return(scores)
+
+}

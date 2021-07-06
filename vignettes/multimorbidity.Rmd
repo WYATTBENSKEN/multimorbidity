@@ -127,3 +127,12 @@ charlson_data <- charlson(dat = limit_data, id = patient_id, dx = dx, version = 
 head(charlson_data, 5)
 ```
 
+# Claims Frailty Index
+
+```{r}
+cfi_data <- cfi(dat = limit_data, id = patient_id, dx = dx, version = 19, version_var = version)
+```
+
+```{r, echo = FALSE}
+head(cfi_data, 5)
+```

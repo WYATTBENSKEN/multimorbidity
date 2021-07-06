@@ -44,22 +44,18 @@ cfi <- function(dat = NULL,
 
   # CFI ICD-9 ----
 
-  # TO DO ----
-  # 1. Convert Dx to Numeric
-  # 2. Check DX column name
-
   if (version == 9){
 
-    lookup_dx9disease <- function(data, lookup)
-    {data <- sqldf::sqldf("select A.*, B.disease_number from
-                 data A left join lookup B
-                 ON (A.dx >= B.start and A.dx < B.stop)")
-    }
-
     dat1_9 <- dat1 %>%
-      dplyr::filter(version_var == 9)
+      dplyr::filter({{version_var}} == 9)
 
-    dat_dx9 <- lookup_dx9disease(dat1_9, lookup=dx9lookup)
+    dat1_9 <- dat1_9 %>%
+      dplyr::mutate(dx = as.numeric(dx))
+
+    dat_dx9 <- sqldf::sqldf("select A.*, B.disease_number from
+                 dat1_9 A left join dx9lookup B
+                 ON (A.dx >= B.start and A.dx < B.stop)")
+    dat_dx9[is.na(dat_dx9)] <- 0
     dat_dx9[is.na(dat_dx9)] <- 0
 
   }
@@ -73,7 +69,7 @@ cfi <- function(dat = NULL,
 
     dat_dx10 <- merge(dat1_10, dx10lookup, all.x=TRUE)
     dat_dx10[is.na(dat_dx10)] <- 0
-    dat_dx10 <- dat_dx10[order(dat_dx10$patid,dat_dx10$dx),]
+    dat_dx10 <- dat_dx10[order(dat_dx10$id2,dat_dx10$dx),]
 
 
   }
@@ -83,37 +79,40 @@ cfi <- function(dat = NULL,
 
   else if (version == 19){
     dat1_9 <- dat1 %>%
-      dplyr::filter(version_var == 9)
+      dplyr::filter({{version_var}} == 9)
     dat1_10 <- dat1 %>%
-      dplyr::filter(version_var == 10)
+      dplyr::filter({{version_var}} == 10)
 
-    dat_dx9 <- lookup_dx9disease(dat1_9, lookup=dx9lookup)
+    dat1_9 <- dat1_9 %>%
+      dplyr::mutate(dx = as.numeric(dx))
+
+    dat_dx9 <- sqldf::sqldf("select A.*, B.disease_number from
+                 dat1_9 A left join dx9lookup B
+                 ON (A.dx >= B.start and A.dx < B.stop)")
     dat_dx9[is.na(dat_dx9)] <- 0
 
     dat_dx10 <- unique(dat1_10)
     dat_dx10 <- merge(dat_dx10, dx10lookup, all.x=TRUE)
     dat_dx10[is.na(dat_dx10)] <- 0
-    dat_dx10 <- dat_dx10[order(dat_dx10$patid,dat_dx10$dx),]
+  #  dat_dx10 <- dat_dx10[order(dat_dx10$id2,dat_dx10$dx),]
 
   }
 
 
   # CFI - Procedure Codes ----
 
-  lookup_pxdisease <- function(data, lookup)
-  {
-
-  data <- sqldf::sqldf("select A.*, B.disease_number from
-                 data A left join lookup B
-                 ON (A.px >= B.start and A.px <= B.stop)")
-
-    }
-
   dat1_px <- dat1 %>%
-    dplyr::filter(version_var == 2)
+    dplyr::filter({{version_var}} == 1)
+
+  dat1_px <- dat1_px %>%
+    dplyr::mutate(dx = as.numeric(dx))
 
   dat1_px <- unique(dat1_px)
-  dat_px <- lookup_pxdisease(dat1_px, lookup=pxlookup)
+
+  dat_px <- sqldf::sqldf("select A.*, B.disease_number from
+                 dat1_px A left join pxlookup B
+                 ON (A.dx >= B.start and A.dx <= B.stop)")
+
   dat_px[is.na(dat_px)] <- 0
   # If a PX value isn't 5 characters or if last character
   # isn't a number, PX should not be scored. Set to 0.
@@ -123,11 +122,10 @@ cfi <- function(dat = NULL,
   # default weight (ModelIntercept) for any PatID that is not included in the DX9, DX10 or PX file
 
   iddata <- dat1 %>%
-    dplyr::select(id)
+    dplyr::select(id2)
 
   iddata <- unique(iddata)
   iddata['disease_number'] = 0
-
 
   # Remove duplicates. Each DX/PX should only be weighted once. ----
   if (version == 9){
@@ -173,19 +171,26 @@ cfi <- function(dat = NULL,
   }
 
   diseasedata <- unique(diseasedata)
-  diseasedatasort <- diseasedata[order(diseasedata$patid,diseasedata$disease_number),]
+#  diseasedatasort <- diseasedata[order(diseasedata$id2,diseasedata$disease_number),]
+
+  diseasedatasort <- diseasedata
 
   # Assign weights ----
   # Merge the disease weights on to the disease data and fill non-matches (NA) with 0
   diseasedatasort <- merge(diseasedatasort, weightlookup, all.x=TRUE)
   diseasedatasort[is.na(diseasedatasort)] <- 0
-  diseasedatasort <- diseasedatasort[order(diseasedatasort$patid,diseasedatasort$disease_number),]
 
   # Calculate frailty scores by summing the weights of records grouped by patient ID. ----
   # ModelIntercept value added to every score. Default score for those with no DX/PX.
-  scores <- stats::aggregate(diseasedatasort$weight, by=list(patid=diseasedatasort$patid), FUN=sum)
+
+
+  scores <- diseasedatasort %>%
+    dplyr::group_by({{id}}) %>%
+    dplyr::summarize(x = sum(.data$weight)) %>%
+    dplyr::ungroup()
+
   scores$x <- scores$x + ModelIntercept
-  colnames(scores) <- c(id, 'frailty_index')
+  colnames(scores) <- c(id2, 'frailty_index')
 
   return(scores)
 

@@ -16,9 +16,9 @@ in this package have been developed by other researchers and are
 detailed in depth below.
 
 This package is meant to be both user-friendly and transparent. An
-individual should feel comfortably understanding what’s ‘under the hood’
-with these various metrics and the functions are written in a way that
-makes this possible.
+individual should feel comfortable understanding what’s ‘under the hood’
+with these various metrics. Given this, this function has been written
+in a way that makes the code and specific diagnosis codes accessible.
 
 ## Warning and Notice
 

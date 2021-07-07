@@ -4,7 +4,14 @@
 \alias{cfi}
 \title{Claims-based Frailty Index (CFI)}
 \usage{
-cfi(dat = NULL, id = NULL, dx = "dx", version = 19, version_var = NULL)
+cfi(
+  dat = NULL,
+  id = NULL,
+  dx = "dx",
+  version = 19,
+  version_var = NULL,
+  hcpcs = "yes"
+)
 }
 \arguments{
 \item{dat}{dataset which has been properly prepared using 'prepare_data()'}
@@ -17,7 +24,9 @@ cfi(dat = NULL, id = NULL, dx = "dx", version = 19, version_var = NULL)
 Both: 19)}
 
 \item{version_var}{variable which denotes if the diagnoses on that row are ICD-9 (9) or
-ICD-10 (10)
+ICD-10 (10)}
+
+\item{hcpcs}{hether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 
 @importFrom rlang .data
 @importFrom stats

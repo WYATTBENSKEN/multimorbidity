@@ -14,6 +14,7 @@
 #'     Both: 19)
 #' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
 #'     ICD-10 (10)
+#' @param hcpcs hether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 #'
 #'   @importFrom rlang .data
 #'   @importFrom stats
@@ -24,7 +25,8 @@ cfi <- function(dat = NULL,
                 id = NULL,
                 dx = "dx",
                 version = 19,
-                version_var = NULL){
+                version_var = NULL,
+                hcpcs = "yes"){
 
 
   id2 <- rlang::quo_name(rlang::enquo(id))
@@ -101,6 +103,8 @@ cfi <- function(dat = NULL,
 
   # CFI - Procedure Codes ----
 
+  if (hcpcs == "yes"){
+
   dat1_px <- dat1 %>%
     dplyr::filter({{version_var}} == 1)
 
@@ -118,6 +122,8 @@ cfi <- function(dat = NULL,
   # isn't a number, PX should not be scored. Set to 0.
   dat_px <- within(dat_px, disease_number[nchar(dx) != 5 | grepl("[0-9]", substr(dx, nchar(dx), nchar(dx))) == FALSE] <- 0)
 
+  }
+
   # Assign dummy disease_number = 0 for all study IDs. This will have the effect of assigning the ----
   # default weight (ModelIntercept) for any PatID that is not included in the DX9, DX10 or PX file
 
@@ -128,7 +134,7 @@ cfi <- function(dat = NULL,
   iddata['disease_number'] = 0
 
   # Remove duplicates. Each DX/PX should only be weighted once. ----
-  if (version == 9){
+  if (version == 9 & hcpcs == "yes"){
 
     # Combine the data, keeping only patient ID and disease number
     diseasedata <- data.frame()
@@ -142,7 +148,20 @@ cfi <- function(dat = NULL,
 
   }
 
-  else if (version == 10){
+  else if (version == 9 & hcpcs == "no"){
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx9, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  else if (version == 10 & hcpcs == "yes"){
 
     # Combine the data, keeping only patient ID and disease number
     diseasedata <- data.frame()
@@ -156,12 +175,38 @@ cfi <- function(dat = NULL,
 
   }
 
-  else if (version == 19){
+  else if (version == 10 & hcpcs == "no"){
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx10, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  else if (version == 19 & hcpcs == "yes"){
 
     # Combine the data, keeping only patient ID and disease number
     diseasedata <- data.frame()
     base_names <- names(iddata)
     list_df <- list(dat_dx9, dat_dx10, dat_px, iddata)
+    for(item in list_df)
+    {
+      items <- item[, base_names]
+      diseasedata <- rbind(diseasedata, items)
+    }
+
+  }
+
+  else if (version == 19 & hcpcs == "no"){
+    # Combine the data, keeping only patient ID and disease number
+    diseasedata <- data.frame()
+    base_names <- names(iddata)
+    list_df <- list(dat_dx9, dat_dx10, iddata)
     for(item in list_df)
     {
       items <- item[, base_names]

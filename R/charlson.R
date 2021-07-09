@@ -81,23 +81,23 @@ charlson <- function(dat = NULL,
     ## Code ----
 
     dat1 <- dat %>%
-      dplyr::mutate(myocar = dplyr::if_else(stringr::str_starts(dx, paste(myocar9_str, collapse = "|")), 1, 0),
-                    chf = dplyr::if_else(dx %in% chf9 | stringr::str_starts(dx, paste(chf9_str, collapse = "|")), 1, 0),
-                    periph_vasc = dplyr::if_else(dx %in% periph_vasc9 | stringr::str_starts(dx, paste(periph_vasc9_str, collapse = "|")), 1, 0),
-                    cerebro = dplyr::if_else(dx %in% cerebro9 | stringr::str_starts(dx, paste(cerebro9_str, collapse = "|")), 1, 0),
-                    dementia = dplyr::if_else(dx %in% dementia9 | stringr::str_starts(dx, paste(dementia9_str, collapse = "|")), 1, 0),
-                    chronic_pulm = dplyr::if_else(dx %in% chronic_pulm9 | stringr::str_starts(dx, paste(chronic_pulm9_str, collapse = "|")), 1, 0),
+      dplyr::mutate(myocar = dplyr::if_else(stringr::str_starts(dx, paste(myocar9_str, sep = "|", collapse = "|")), 1, 0),
+                    chf = dplyr::if_else(dx %in% chf9 | stringr::str_starts(dx, paste(chf9_str)), 1, 0),
+                    periph_vasc = dplyr::if_else(dx %in% periph_vasc9 | stringr::str_starts(dx, paste(periph_vasc9_str, sep = "|", collapse = "|")), 1, 0),
+                    cerebro = dplyr::if_else(dx %in% cerebro9 | stringr::str_starts(dx, paste(cerebro9_str, sep = "|", collapse = "|")), 1, 0),
+                    dementia = dplyr::if_else(dx %in% dementia9 | stringr::str_starts(dx, paste(dementia9_str)), 1, 0),
+                    chronic_pulm = dplyr::if_else(dx %in% chronic_pulm9 | stringr::str_starts(dx, paste(chronic_pulm9_str, sep = "|", collapse = "|")), 1, 0),
                     rheum = dplyr::if_else(dx %in% rheum9, 1, 0),
-                    peptic_ulcer = dplyr::if_else(stringr::str_starts(dx, paste(peptic_ulcer9_str, collapse = "|")), 1, 0),
-                    mild_liv = dplyr::if_else(dx %in% mild_liv9 | stringr::str_starts(dx, paste(mild_liv9_str, collapse = "|")), 1, 0),
-                    diab_uc = dplyr::if_else(dx %in% diab_uc9 | stringr::str_starts(dx, paste(diab_uc9_str, collapse = "|")), 1, 0),
-                    diab_c = dplyr::if_else(stringr::str_starts(dx, paste(diab_c9_str, collapse = "|")), 1, 0),
-                    hemi_para = dplyr::if_else(dx %in% hemi_para9 | stringr::str_starts(dx, paste(hemi_para9_str, collapse = "|")), 1, 0),
-                    renal = dplyr::if_else(dx %in% renal9 | stringr::str_starts(dx, paste(renal9_str, collapse = "|")), 1, 0),
-                    malig = dplyr::if_else(dx %in% malig9 | stringr::str_starts(dx, paste(malig9_str, collapse = "|")), 1, 0),
-                    mod_sev_liv = dplyr::if_else(stringr::str_starts(dx, paste(mod_sev_liv9_str, collapse = "|")), 1, 0),
-                    met_solid = dplyr::if_else(stringr::str_starts(dx, paste(met_solid9_str, collapse = "|")), 1, 0),
-                    hiv = dplyr::if_else(stringr::str_starts(dx, paste(hiv9_str, collapse = "|")), 1, 0))
+                    peptic_ulcer = dplyr::if_else(stringr::str_starts(dx, paste(peptic_ulcer9_str, sep = "|", collapse = "|")), 1, 0),
+                    mild_liv = dplyr::if_else(dx %in% mild_liv9 | stringr::str_starts(dx, paste(mild_liv9_str, sep = "|", collapse = "|")), 1, 0),
+                    diab_uc = dplyr::if_else(dx %in% diab_uc9 | stringr::str_starts(dx, paste(diab_uc9_str, sep = "|", collapse = "|")), 1, 0),
+                    diab_c = dplyr::if_else(stringr::str_starts(dx, paste(diab_c9_str, sep = "|", collapse = "|")), 1, 0),
+                    hemi_para = dplyr::if_else(dx %in% hemi_para9 | stringr::str_starts(dx, paste(hemi_para9_str, sep = "|", collapse = "|")), 1, 0),
+                    renal = dplyr::if_else(dx %in% renal9 | stringr::str_starts(dx, paste(renal9_str, sep = "|", collapse = "|")), 1, 0),
+                    malig = dplyr::if_else(dx %in% malig9 | stringr::str_starts(dx, paste(malig9_str, sep = "|", collapse = "|")), 1, 0),
+                    mod_sev_liv = dplyr::if_else(stringr::str_starts(dx, paste(mod_sev_liv9_str, sep = "|", collapse = "|")), 1, 0),
+                    met_solid = dplyr::if_else(stringr::str_starts(dx, paste(met_solid9_str, sep = "|", collapse = "|")), 1, 0),
+                    hiv = dplyr::if_else(stringr::str_starts(dx, paste(hiv9_str, sep = "|", collapse = "|")), 1, 0))
 
     dat1 <- dat1 %>%
       dplyr::mutate(diab_uc = dplyr::if_else(.data$diab_c == 1, 0, .data$diab_uc),
@@ -170,23 +170,23 @@ charlson <- function(dat = NULL,
     # Code ----
 
     dat1 <- dat %>%
-      dplyr::mutate(myocar = dplyr::if_else(stringr::str_starts(dx, paste(myocar10_str, collapse = "|")), 1, 0),
-                    chf = dplyr::if_else(dx %in% chf10 | stringr::str_starts(dx, paste(chf10_str, collapse = "|")), 1, 0),
-                    periph_vasc = dplyr::if_else(dx %in% periph_vasc10 | stringr::str_starts(dx, paste(periph_vasc10_str, collapse = "|")), 1, 0),
-                    cerebro = dplyr::if_else(dx %in% cerebro10 | stringr::str_starts(dx, paste(cerebro10_str, collapse = "|")), 1, 0),
-                    dementia = dplyr::if_else(dx %in% dementia10 | stringr::str_starts(dx, paste(dementia10_str, collapse = "|")), 1, 0),
-                    chronic_pulm = dplyr::if_else(dx %in% chronic_pulm10 | stringr::str_starts(dx, paste(chronic_pulm10_str, collapse = "|")), 1, 0),
-                    rheum = dplyr::if_else(dx %in% rheum10 | stringr::str_starts(dx, paste(rheum10_str, collapse = "|")), 1, 0),
-                    peptic_ulcer = dplyr::if_else(stringr::str_starts(dx, paste(peptic_ulcer10_str, collapse = "|")), 1, 0),
-                    mild_liv = dplyr::if_else(dx %in% mild_liv10 | stringr::str_starts(dx, paste(mild_liv10_str, collapse = "|")), 1, 0),
+      dplyr::mutate(myocar = dplyr::if_else(stringr::str_starts(dx, paste(myocar10_str, sep = "|", collapse = "|")), 1, 0),
+                    chf = dplyr::if_else(dx %in% chf10 | stringr::str_starts(dx, paste(chf10_str, sep = "|", collapse = "|")), 1, 0),
+                    periph_vasc = dplyr::if_else(dx %in% periph_vasc10 | stringr::str_starts(dx, paste(periph_vasc10_str, sep = "|", collapse = "|")), 1, 0),
+                    cerebro = dplyr::if_else(dx %in% cerebro10 | stringr::str_starts(dx, paste(cerebro10_str, sep = "|", collapse = "|")), 1, 0),
+                    dementia = dplyr::if_else(dx %in% dementia10 | stringr::str_starts(dx, paste(dementia10_str, sep = "|", collapse = "|")), 1, 0),
+                    chronic_pulm = dplyr::if_else(dx %in% chronic_pulm10 | stringr::str_starts(dx, paste(chronic_pulm10_str, sep = "|", collapse = "|")), 1, 0),
+                    rheum = dplyr::if_else(dx %in% rheum10 | stringr::str_starts(dx, paste(rheum10_str, sep = "|", collapse = "|")), 1, 0),
+                    peptic_ulcer = dplyr::if_else(stringr::str_starts(dx, paste(peptic_ulcer10_str, sep = "|", collapse = "|")), 1, 0),
+                    mild_liv = dplyr::if_else(dx %in% mild_liv10 | stringr::str_starts(dx, paste(mild_liv10_str, sep = "|", collapse = "|")), 1, 0),
                     diab_uc = dplyr::if_else(dx %in% diab_uc10, 1, 0),
-                    diab_c = dplyr::if_else(dx %in% diab_c10 | stringr::str_starts(dx, paste(diab_c10_str, collapse = "|")), 1, 0),
-                    hemi_para = dplyr::if_else(dx %in% hemi_para10 | stringr::str_starts(dx, paste(hemi_para10_str, collapse = "|")), 1, 0),
-                    renal = dplyr::if_else(dx %in% renal10 | stringr::str_starts(dx, paste(renal10_str, collapse = "|")), 1, 0),
-                    malig = dplyr::if_else(stringr::str_starts(dx, paste(malig10_str, collapse = "|")), 1, 0),
+                    diab_c = dplyr::if_else(dx %in% diab_c10 | stringr::str_starts(dx, paste(diab_c10_str, sep = "|", collapse = "|")), 1, 0),
+                    hemi_para = dplyr::if_else(dx %in% hemi_para10 | stringr::str_starts(dx, paste(hemi_para10_str, sep = "|", collapse = "|")), 1, 0),
+                    renal = dplyr::if_else(dx %in% renal10 | stringr::str_starts(dx, paste(renal10_str, sep = "|", collapse = "|")), 1, 0),
+                    malig = dplyr::if_else(stringr::str_starts(dx, paste(malig10_str, sep = "|", collapse = "|")), 1, 0),
                     mod_sev_liv = dplyr::if_else(dx %in% mod_sev_liv10, 1, 0),
-                    met_solid = dplyr::if_else(stringr::str_starts(dx, paste(met_solid10_str, collapse = "|")), 1, 0),
-                    hiv = dplyr::if_else(stringr::str_starts(dx, paste(hiv10_str, collapse = "|")), 1, 0))
+                    met_solid = dplyr::if_else(stringr::str_starts(dx, paste(met_solid10_str, sep = "|", collapse = "|")), 1, 0),
+                    hiv = dplyr::if_else(stringr::str_starts(dx, paste(hiv10_str, sep = "|", collapse = "|")), 1, 0))
 
     dat1 <- dat1 %>%
       dplyr::mutate(diab_uc = dplyr::if_else(.data$diab_c == 1, 0, .data$diab_uc),
@@ -305,56 +305,56 @@ charlson <- function(dat = NULL,
         dplyr::filter({{version_var}} == 9 | {{version_var}} == 10)
 
       dat1 <- dat %>%
-        dplyr::mutate(myocar = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(myocar9_str, collapse = "|"))) |
-                                             ({{version_var}} ==  10 & (stringr::str_starts(dx, paste(myocar10_str, collapse = "|")))),
+        dplyr::mutate(myocar = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(myocar9_str, sep = "|", collapse = "|"))) |
+                                             ({{version_var}} ==  10 & (stringr::str_starts(dx, paste(myocar10_str, sep = "|", collapse = "|")))),
                                            1, 0),
-                      chf = dplyr::if_else(({{version_var}} ==  9 & (dx %in% chf9 | stringr::str_starts(dx, paste(chf9_str, collapse = "|")))) |
-                                               ({{version_var}} ==  10 & (dx %in% chf10 | stringr::str_starts(dx, paste(chf10_str, collapse = "|")))),
+                      chf = dplyr::if_else(({{version_var}} ==  9 & (dx %in% chf9 | stringr::str_starts(dx, paste(chf9_str, sep = "|", collapse = "|")))) |
+                                               ({{version_var}} ==  10 & (dx %in% chf10 | stringr::str_starts(dx, paste(chf10_str, sep = "|", collapse = "|")))),
                                              1, 0),
-                      periph_vasc = dplyr::if_else(({{version_var}} ==  9 & (dx %in% periph_vasc9 | stringr::str_starts(dx, paste(periph_vasc9_str, collapse = "|")))) |
-                                                  ({{version_var}} ==  10 & (dx %in% periph_vasc10 | stringr::str_starts(dx, paste(periph_vasc10_str, collapse = "|")))),
+                      periph_vasc = dplyr::if_else(({{version_var}} ==  9 & (dx %in% periph_vasc9 | stringr::str_starts(dx, paste(periph_vasc9_str, sep = "|", collapse = "|")))) |
+                                                  ({{version_var}} ==  10 & (dx %in% periph_vasc10 | stringr::str_starts(dx, paste(periph_vasc10_str, sep = "|", collapse = "|")))),
                                                 1, 0),
-                      cerebro = dplyr::if_else(({{version_var}} ==  9 & (dx %in% cerebro9 | stringr::str_starts(dx, paste(cerebro9_str, collapse = "|")))) |
-                                                     ({{version_var}} ==  10 & (dx %in% cerebro10 | stringr::str_starts(dx, paste(cerebro10_str, collapse = "|")))),
+                      cerebro = dplyr::if_else(({{version_var}} ==  9 & (dx %in% cerebro9 | stringr::str_starts(dx, paste(cerebro9_str, sep = "|", collapse = "|")))) |
+                                                     ({{version_var}} ==  10 & (dx %in% cerebro10 | stringr::str_starts(dx, paste(cerebro10_str, sep = "|", collapse = "|")))),
                                                    1, 0),
-                      dementia = dplyr::if_else(({{version_var}} ==  9 & (dx %in% dementia9 | stringr::str_starts(dx, paste(dementia9_str, collapse = "|")))) |
-                                                ({{version_var}} ==  10 & (dx %in% dementia10 | stringr::str_starts(dx, paste(dementia10_str, collapse = "|")))),
+                      dementia = dplyr::if_else(({{version_var}} ==  9 & (dx %in% dementia9 | stringr::str_starts(dx, paste(dementia9_str, sep = "|", collapse = "|")))) |
+                                                ({{version_var}} ==  10 & (dx %in% dementia10 | stringr::str_starts(dx, paste(dementia10_str, sep = "|", collapse = "|")))),
                                               1, 0),
-                      chronic_pulm = dplyr::if_else(({{version_var}} == 9 & (dx %in% chronic_pulm9 | stringr::str_starts(dx, paste(chronic_pulm9_str, collapse = "|")))) |
-                                               ({{version_var}} ==  10 & (dx %in% chronic_pulm10 | stringr::str_starts(dx, paste(chronic_pulm10_str, collapse = "|")))),
+                      chronic_pulm = dplyr::if_else(({{version_var}} == 9 & (dx %in% chronic_pulm9 | stringr::str_starts(dx, paste(chronic_pulm9_str, sep = "|", collapse = "|")))) |
+                                               ({{version_var}} ==  10 & (dx %in% chronic_pulm10 | stringr::str_starts(dx, paste(chronic_pulm10_str, sep = "|", collapse = "|")))),
                                              1 ,0),
                       rheum = dplyr::if_else(({{version_var}} ==  9 & dx %in% rheum9) |
-                                                   ({{version_var}} ==  10 & (dx %in% rheum10 | stringr::str_starts(dx, paste(rheum10_str, collapse = "|")))),
+                                                   ({{version_var}} ==  10 & (dx %in% rheum10 | stringr::str_starts(dx, paste(rheum10_str, sep = "|", collapse = "|")))),
                                                  1, 0),
-                      peptic_ulcer = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(peptic_ulcer9_str, collapse = "|"))) |
-                                               ({{version_var}} ==  10 & stringr::str_starts(dx, paste(peptic_ulcer10_str, collapse = "|"))),
+                      peptic_ulcer = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(peptic_ulcer9_str, sep = "|", collapse = "|"))) |
+                                               ({{version_var}} ==  10 & stringr::str_starts(dx, paste(peptic_ulcer10_str, sep = "|", collapse = "|"))),
                                              1, 0),
-                      mild_liv = dplyr::if_else(({{version_var}} ==  9 & (dx %in% mild_liv9 | stringr::str_starts(dx, paste(mild_liv9_str, collapse = "|")))) |
-                                                      ({{version_var}} ==  10 & (dx %in% mild_liv10 | stringr::str_starts(dx, paste(mild_liv10_str, collapse = "|")))),
+                      mild_liv = dplyr::if_else(({{version_var}} ==  9 & (dx %in% mild_liv9 | stringr::str_starts(dx, paste(mild_liv9_str, sep = "|", collapse = "|")))) |
+                                                      ({{version_var}} ==  10 & (dx %in% mild_liv10 | stringr::str_starts(dx, paste(mild_liv10_str, sep = "|", collapse = "|")))),
                                                     1, 0),
-                      diab_uc = dplyr::if_else(({{version_var}} ==  9 & (dx %in% diab_uc9 | stringr::str_starts(dx, paste(diab_uc9_str, collapse = "|")))) |
+                      diab_uc = dplyr::if_else(({{version_var}} ==  9 & (dx %in% diab_uc9 | stringr::str_starts(dx, paste(diab_uc9_str, sep = "|", collapse = "|")))) |
                                                  ({{version_var}} ==  10 & dx %in% diab_uc10),
                                                1, 0),
-                      diab_c = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(diab_c9_str, collapse = "|"))) |
-                                                ({{version_var}} ==  10 & (dx %in% diab_c10 | stringr::str_starts(dx, paste(diab_c10_str, collapse = "|")))),
+                      diab_c = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(diab_c9_str, sep = "|", collapse = "|"))) |
+                                                ({{version_var}} ==  10 & (dx %in% diab_c10 | stringr::str_starts(dx, paste(diab_c10_str, sep = "|", collapse = "|")))),
                                               1, 0),
-                      hemi_para = dplyr::if_else(({{version_var}} == 9 & (dx %in% hemi_para9 | stringr::str_starts(dx, paste(hemi_para9_str, collapse = "|")))) |
-                                              ({{version_var}} ==  10 & (dx %in% hemi_para10 | stringr::str_starts(dx, paste(hemi_para10_str, collapse = "|")))),
+                      hemi_para = dplyr::if_else(({{version_var}} == 9 & (dx %in% hemi_para9 | stringr::str_starts(dx, paste(hemi_para9_str, sep = "|", collapse = "|")))) |
+                                              ({{version_var}} ==  10 & (dx %in% hemi_para10 | stringr::str_starts(dx, paste(hemi_para10_str, sep = "|", collapse = "|")))),
                                             1, 0),
-                      renal = dplyr::if_else(({{version_var}} ==  9 & (dx %in% renal9 | stringr::str_starts(dx, paste(renal9_str, collapse = "|")))) |
-                                               ({{version_var}} ==  10 & (dx %in% renal10 | stringr::str_starts(dx, paste(renal10_str, collapse = "|")))),
+                      renal = dplyr::if_else(({{version_var}} ==  9 & (dx %in% renal9 | stringr::str_starts(dx, paste(renal9_str, sep = "|", collapse = "|")))) |
+                                               ({{version_var}} ==  10 & (dx %in% renal10 | stringr::str_starts(dx, paste(renal10_str, sep = "|", collapse = "|")))),
                                              1, 0),
-                      malig = dplyr::if_else(({{version_var}} ==  9 & (dx %in% malig9 | stringr::str_starts(dx, paste(malig9_str, collapse = "|")))) |
-                                               ({{version_var}} ==  10 & dx %in% stringr::str_starts(dx, paste(malig10_str, collapse = "|"))),
+                      malig = dplyr::if_else(({{version_var}} ==  9 & (dx %in% malig9 | stringr::str_starts(dx, paste(malig9_str, sep = "|", collapse = "|")))) |
+                                               ({{version_var}} ==  10 & dx %in% stringr::str_starts(dx, paste(malig10_str, sep = "|", collapse = "|"))),
                                              1, 0),
-                      mod_sev_liv = dplyr::if_else(({{version_var}} ==  9 & dx %in% stringr::str_starts(dx, paste(mod_sev_liv9_str, collapse = "|"))) |
+                      mod_sev_liv = dplyr::if_else(({{version_var}} ==  9 & dx %in% stringr::str_starts(dx, paste(mod_sev_liv9_str, sep = "|", collapse = "|"))) |
                                                 ({{version_var}} ==  10 & dx %in% mod_sev_liv10),
                                               1, 0),
-                      met_solid = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(met_solid9_str, collapse = "|"))) |
-                                             ({{version_var}} ==  10 & dx %in% stringr::str_starts(dx, paste(met_solid10_str, collapse = "|"))),
+                      met_solid = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(met_solid9_str, sep = "|", collapse = "|"))) |
+                                             ({{version_var}} ==  10 & dx %in% stringr::str_starts(dx, paste(met_solid10_str, sep = "|", collapse = "|"))),
                                            1 ,0),
-                      hiv = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(hiv9_str, collapse = "|"))) |
-                                               ({{version_var}} ==  10 & stringr::str_starts(dx, paste(hiv10_str, collapse = "|"))),
+                      hiv = dplyr::if_else(({{version_var}} ==  9 & stringr::str_starts(dx, paste(hiv9_str, sep = "|", collapse = "|"))) |
+                                               ({{version_var}} ==  10 & stringr::str_starts(dx, paste(hiv10_str, sep = "|", collapse = "|"))),
                                              1, 0))
 
       dat1 <- dat1 %>%
@@ -405,7 +405,7 @@ charlson <- function(dat = NULL,
   else if (outpatient_two == "yes" | outpatient_two == "Yes"){
     message("You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it.")
 
-    warning("The levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
+    message("The levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
 
     dat_ot <- dat1 %>%
       dplyr::filter(.data$type == "ot" | .data$type == "OT")

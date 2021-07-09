@@ -136,3 +136,24 @@ cfi_data <- cfi(dat = limit_data, id = patient_id, dx = dx, version = 19, versio
 ```{r, echo = FALSE}
 head(cfi_data, 5)
 ```
+
+# Multimorbidity Weighted Index
+
+# Claims Frailty Index
+
+```{r}
+mwi_data <- mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
+
+    dat2 <- mwi_data %>%
+      select(dx, patient_id, diseaseid, weight)
+
+    # Deduplicate by disease number ----
+
+    dat3 <- unique(dat2)
+
+```
+
+```{r, echo = FALSE}
+head(mwi_data, 5)
+```
+

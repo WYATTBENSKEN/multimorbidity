@@ -20,12 +20,6 @@ individual should feel comfortable understanding what’s ‘under the hood’
 with these various metrics. Given this, this function has been written
 in a way that makes the code and specific diagnosis codes accessible.
 
-## Warning and Notice
-
-This package is currently under development. Code contained on this site
-may not have been robustly tested and it is not recommended to use any
-of this code while this warning remains.
-
 ## Installation
 
 There is currently no released version of `multimorbidity` on CRAN.
@@ -87,4 +81,13 @@ uses ICD-9, ICD-10, and procedure codes to establish the frailty score
 for each patient. The code included in this package is largely developed
 from publicly-available code which can be found on the [Harvard
 dataverse](https://dataverse.harvard.edu/dataverse/cfi). As the original
-algorithms included procedure codes, so does this.
+algorithms included HCPCS/CPT procedure codes, so does this.
+
+### Multimorbidity Weighted Index
+
+The Multimorbidity Weighted Index (MWI) was created by [Wei et
+al.](https://pubmed.ncbi.nlm.nih.gov/31917465/) in 2020. This uses ICD-9
+codes (note: ICD-10 is not yet available for MWI) to establish a
+multimorbidity index for each individual. The R code used in this
+package was developed based on the supplement included in the previously
+linked manuscript.

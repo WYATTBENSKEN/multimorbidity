@@ -429,11 +429,6 @@ mwi <- function(dat = NULL,
           diseaseid == 84 ~ 0.029,
           diseaseid == 85 ~ 0))
 
-
-    print(dat1)
-    return(dat1)
-    stop()
-
     dat2 <- dat1 %>%
       dplyr::select(id2, .data$diseaseid, .data$weight)
 

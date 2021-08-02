@@ -1,5 +1,5 @@
 ---
-title: "Working with the Multimorbidity Package"
+title: "Working with the `multimorbidity` Package"
 author: "Wyatt P. Bensken"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -116,7 +116,6 @@ elix_data <- elixhauser(dat = limit_data, id = patient_id, dx = dx, version = 19
 head(elix_data, 5)
 ```
 
-
 ## Charlson Comorbidity Index
 
 ```{r}
@@ -127,7 +126,7 @@ charlson_data <- charlson(dat = limit_data, id = patient_id, dx = dx, version = 
 head(charlson_data, 5)
 ```
 
-# Claims Frailty Index
+## Claims Frailty Index
 
 ```{r}
 cfi_data <- cfi(dat = limit_data, id = patient_id, dx = dx, version = 19, version_var = version)
@@ -137,20 +136,10 @@ cfi_data <- cfi(dat = limit_data, id = patient_id, dx = dx, version = 19, versio
 head(cfi_data, 5)
 ```
 
-# Multimorbidity Weighted Index
-
-# Claims Frailty Index
+## Multimorbidity Weighted Index
 
 ```{r}
 mwi_data <- mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
-
-    dat2 <- mwi_data %>%
-      select(dx, patient_id, diseaseid, weight)
-
-    # Deduplicate by disease number ----
-
-    dat3 <- unique(dat2)
-
 ```
 
 ```{r, echo = FALSE}

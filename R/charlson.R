@@ -403,9 +403,7 @@ charlson <- function(dat = NULL,
   ## OT Limitation ----
 
   else if (outpatient_two == "yes" | outpatient_two == "Yes"){
-    message("You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it.")
-
-    message("The levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
+    message("Message: You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it. Please make sure the levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
 
     dat_ot <- dat1 %>%
       dplyr::filter(.data$type == "ot" | .data$type == "OT")

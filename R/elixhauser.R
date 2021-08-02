@@ -853,7 +853,7 @@ elixhauser <- function(dat = NULL,
   # Elixhauser Both ----
 
   else if (version == 19){
-    message("Specifying that your data uses both ICD-9 and ICD-10 will result in only the Elixhauser comorbidities \n which are compatible with ICD-9, as the changes and additions which are seen in \n ICD-10 have, to date, not been back-mapped to ICD-9.")
+    message("Message: Specifying that your data uses both ICD-9 and ICD-10 will result in only the Elixhauser comorbidities \n which are compatible with ICD-9, as the changes and additions which are seen in \n ICD-10 have, to date, not been back-mapped to ICD-9.")
 
     ## Diagnoses Setup ----
 
@@ -1711,9 +1711,7 @@ elixhauser <- function(dat = NULL,
 
 
   else if ((outpatient_two == "yes" | outpatient_two == "Yes") & (version == 9 | version == 19)){
-    message("You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it.")
-
-    message("The levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
+    message("Message: You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it. Please make sure the levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
 
     dat_ot <- dat1 %>%
       dplyr::filter(.data$type == "ot" | .data$type == "OT")
@@ -1835,9 +1833,7 @@ elixhauser <- function(dat = NULL,
   ## ICD-10 ----
 
   else if(outpatient_two == "yes" | outpatient_two == "Yes"){
-    message("You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it.")
-
-    message("The levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
+    message("Message: You have specified that for a comorbidity to be positvely coded, an individual must have two outpatient claims with it. Please make sure the levels of your variable denoting outpatient type must be either 'ot' or 'OT'")
 
     dat_ot <- dat1 %>%
       dplyr::filter(.data$type == "ot" | .data$type == "OT")
@@ -2084,7 +2080,7 @@ elixhauser <- function(dat = NULL,
         elix_valve = max(.data$elix_valve),
         elix_weightloss = max(.data$elix_weightloss)) %>%
       dplyr::ungroup()
-    message("Currently (2021-06-16) there are no weights available for ICD-10.")
+    message("Message: Currently (2021-06-16) there are no weights available for ICD-10.")
 
   }
 

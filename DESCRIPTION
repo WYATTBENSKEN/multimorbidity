@@ -12,7 +12,7 @@ Description: This package aims to make simple the often duplicative process of i
     The functions contained in this package are meant to first prepare the data to a format
     acceptable by all other packages, then provide a uniform and simple approach to
     generate comorbidity and multimorbidity metrics based on these claims data. The package
-    is ever evolving to include new metrics.
+    is ever evolving to include new metrics, and is always looking for new measures to include.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

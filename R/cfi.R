@@ -108,9 +108,6 @@ cfi <- function(dat = NULL,
   dat1_px <- dat1 %>%
     dplyr::filter({{version_var}} == 1)
 
-  dat1_px <- dat1_px %>%
-    dplyr::mutate(dx = as.numeric(dx))
-
   dat1_px <- unique(dat1_px)
 
   dat_px <- sqldf::sqldf("select A.*, B.disease_number from

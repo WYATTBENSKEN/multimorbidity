@@ -148,7 +148,7 @@ head(mwi_data, 5)
 
 ## Nicholson and Fortin Conditions
 
-```{r}
+```{r}tw
 nf_data <- nicholsonfortin(dat = limit_data, id = patient_id, dx = dx, version = 19, version_var = version, outpatient_two = "yes")
 ```
 

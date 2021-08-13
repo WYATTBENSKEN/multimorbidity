@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "wpb27@case.edu",
            comment = c(ORCID = "0000-0002-2597-9732"))
-Description: This package aims to make simple the often duplicative process of implementing
-    various comorbidty and multimorbidty measures to claims and other administrative data.
+Description: Identifying comorbidities, frailty, and multimorbidity in claims 
+    and administrative data is often a duplicative process.
     The functions contained in this package are meant to first prepare the data to a format
     acceptable by all other packages, then provide a uniform and simple approach to
     generate comorbidity and multimorbidity metrics based on these claims data. The package

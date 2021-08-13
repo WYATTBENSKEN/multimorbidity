@@ -18,6 +18,7 @@
 #'
 #'   @export
 
+#' @importFrom rlang .data
 charlson <- function(dat = NULL,
                        id = NULL,
                        dx = "dx",
@@ -507,7 +508,7 @@ charlson <- function(dat = NULL,
         charlson_hiv = max(.data$charlson_hiv)) %>%
       dplyr::ungroup()
 
-    # TO DO Weighting ----
+    # Weighting ----
 
     dat3 <- dat3 %>%
       dplyr::mutate(charlson_score = .data$charlson_myocar + .data$charlson_chf +
@@ -527,5 +528,3 @@ charlson <- function(dat = NULL,
   return(dat4)
 
 }
-
-#' @export

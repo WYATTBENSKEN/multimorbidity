@@ -18,6 +18,7 @@
 #'
 #' @export
 
+#' @importFrom rlang .data
 elixhauser <- function(dat = NULL,
                        id = NULL,
                        dx = "dx",
@@ -2169,4 +2170,3 @@ elixhauser <- function(dat = NULL,
 
 }
 
-#' @export

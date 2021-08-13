@@ -19,6 +19,8 @@
 #'
 #' @export
 
+
+#' @importFrom rlang .data
 prepare_data <- function(dat = NULL,
                          style = "long",
                          id = NULL,

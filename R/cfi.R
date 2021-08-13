@@ -18,6 +18,7 @@
 #'
 #' @export
 
+#' @importFrom rlang .data
 cfi <- function(dat = NULL,
                 id = NULL,
                 dx = "dx",

@@ -498,5 +498,3 @@ nicholsonfortin <- function(dat = NULL,
   return(dat4)
 
 }
-
-#' @export

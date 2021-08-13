@@ -17,6 +17,7 @@
 #'
 #' @export
 
+#' @importFrom rlang .data
 mwi <- function(dat = NULL,
                 id = NULL,
                 dx = "dx",

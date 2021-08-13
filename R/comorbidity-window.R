@@ -16,6 +16,7 @@
 #'
 #' @export
 
+#' @importFrom rlang .data
 comorbidity_window <- function(dat = NULL,
                                id_dat = NULL,
                                id = NULL,
@@ -44,5 +45,3 @@ comorbidity_window <- function(dat = NULL,
     return(df2) }
 
   }
-
-#' @export

@@ -6,8 +6,8 @@
 \usage{
 prepare_data(
   dat = NULL,
-  id = NULL,
   style = "long",
+  id = NULL,
   prefix_dx = "dx",
   hcpcs = "no",
   prefix_hcpcs,
@@ -19,15 +19,15 @@ prepare_data(
 \arguments{
 \item{dat}{claims dataset}
 
-\item{id}{unique patient identifier variable name}
-
 \item{style}{long, the default, is one diagnosis column per row whereas wide is multiple diagnosis columns}
 
-\item{prefix_dx}{the variable prefix for the diagnosis columns (defaults to dx)}
+\item{id}{unique patient identifier variable name}
+
+\item{prefix_dx}{the variable prefix for the diagnosis columns (defaults to "dx"), in quotes}
 
 \item{hcpcs}{whether or not HCPCS variables are included ("yes" or "no", where "no" is the default)}
 
-\item{prefix_hcpcs}{if HCPCS are included, the variable prefix}
+\item{prefix_hcpcs}{if HCPCS are included, the variable prefix in quotes}
 
 \item{version_var}{variable which denotes if the diagnoses on that row are ICD-9 (9) or ICD-10 (10)}
 

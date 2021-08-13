@@ -8,21 +8,20 @@
 #'    regardless of setup.
 #'
 #' @param dat claims dataset
-#' @param id unique patient identifier variable name
 #' @param style long, the default, is one diagnosis column per row whereas wide is multiple diagnosis columns
-#' @param prefix_dx the variable prefix for the diagnosis columns (defaults to dx)
+#' @param id unique patient identifier variable name
+#' @param prefix_dx the variable prefix for the diagnosis columns (defaults to "dx"), in quotes
 #' @param hcpcs whether or not HCPCS variables are included ("yes" or "no", where "no" is the default)
-#' @param prefix_hcpcs if HCPCS are included, the variable prefix
+#' @param prefix_hcpcs if HCPCS are included, the variable prefix in quotes
 #' @param version_var  variable which denotes if the diagnoses on that row are ICD-9 (9) or ICD-10 (10)
 #' @param type_name variable to denote if the claim is inpatient (ip) or outpatient (ot)
 #' @param date variable with the date of the claim
 #'
-#' @importFrom rlang .data
 #' @export
 
 prepare_data <- function(dat = NULL,
-                         id = NULL,
                          style = "long",
+                         id = NULL,
                          prefix_dx = "dx",
                          hcpcs = "no",
                          prefix_hcpcs,
@@ -57,10 +56,12 @@ prepare_data <- function(dat = NULL,
       dat2 <- dat_dx}
   }
 
-  else {
-    dat2 <- dplyr::rename(dat, "dx" = prefix_dx) # if the data is already long we change the variable names for later steps
-    dplyr::rename(dat2, "claim_date" = date2)
-    var3 <- c(id2, date2, "dx", version2)
+  else { # if the data is already long we change the variable names for later steps
+    dat2 <- dplyr::rename(dat, "dx" = prefix_dx)
+    dat2 <- dplyr::rename(dat2, "claim_date" = date2)
+    dat2 <- dplyr::rename(dat2, "version" = version2)
+    dat2 <- dplyr::rename(dat2, "type" = type2)
+    var3 <- c(id2, "claim_date", "dx", "version", "type")
     dat2 <- dat2[tidyselect::all_of(var3)]
   }
 

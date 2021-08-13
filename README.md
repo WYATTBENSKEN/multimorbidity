@@ -18,10 +18,11 @@ researchers and are detailed in depth below.
 This package is meant to be both user-friendly and transparent. An
 individual should feel comfortable understanding what’s ‘under the hood’
 with these various metrics. Given this, this function has been written
-in a way that makes the code and specific diagnosis codes accessible.
+in a way that makes the code, including specific diagnosis codes,
+accessible.
 
-For more robust descriptions and examples of the various functions
-included in this package, please see the vignette.
+For examples of the various functions included in this package, please
+see the documentation or the vignette.
 
 ## Installation
 
@@ -39,7 +40,7 @@ devtools::install_github("WYATTBENSKEN/multimorbidity")
 
 In addition to citing this R Package, we ask that you please cite the
 original manuscripts which developed these algorithms. Portions of this
-package, specifically, the Elixhauser and Charlson diagnoses codes, were
+package, specifically the Elixhauser and Charlson diagnoses codes, were
 adapted from another package,
 [`comorbidity`](https://github.com/ellessenne/comorbidity).
 
@@ -54,13 +55,13 @@ contains the diagnosis code, and 1 column which will note if it’s ICD-9
 be of interest depending on the specification including type (inpatient
 or outpatient) and date.
 
-The second function, `comorbidity_window()`, is not as suggested as the
-`prepare_data()` function but may be useful to some investigators.
-Oftentimes, we may be interested in limiting our claims to a specific
-window, such as the 1-year before diagnosis. To accommodate this,
-`comorbidity_window()` will merge your prepared diagnosis dataset with
-an ID dataset and limit the claims/diagnoses to a specific time window
-relative to a date of interest.
+The second function, `comorbidity_window()`, is not highly suggest as
+the `prepare_data()` function is but may be useful to some
+investigators. Oftentimes, we may be interested in limiting our claims
+to a specific window, such as the 1-year before diagnosis. To
+accommodate this, `comorbidity_window()` will merge your prepared
+diagnosis dataset with an ID dataset and limit the claims/diagnoses to a
+specific time window relative to a date of interest.
 
 ## Included Comorbidities and Indices
 

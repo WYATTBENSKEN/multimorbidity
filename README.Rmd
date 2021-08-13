@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `multimorbidity` is to create as single package which can take original claims data, clean and organize them to a simple format, which can then be immediately used to obtain any of a number of comorbidity, frailty, and multimorbidity measures. This package is meant to be a simple and transparent one-stop-shop for those working with claims or other administrative health care data. The measures included in this package have been developed by other researchers and are detailed in depth below.
+The goal of `multimorbidity` is to create a single package which can take original claims data, with the ability to clean and organize them to a simple format, which can then be immediately used to obtain any of a number of comorbidity, frailty, and multimorbidity measures. This package is meant to be a simple and transparent one-stop-shop for those working with claims or other administrative health care data. The measures included in this package have been developed by other researchers and are detailed in depth below.
 
 This package is meant to be both user-friendly and transparent. An individual should feel comfortable understanding what's 'under the hood' with these various metrics. Given this, this function has been written in a way that makes the code and specific diagnosis codes accessible.
 

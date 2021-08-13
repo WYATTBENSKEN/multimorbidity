@@ -76,28 +76,6 @@ prepared_data <- prepare_data(dat = claims,
                               type_name = visit_type,
                               date = date_of_serv)
 
-long_data <- prepare_data(dat = claims,
-                              id = patient_id,
-                              style = "wide",
-                              prefix_dx = "dx",
-                              hcpcs = "yes",
-                              prefix_hcpcs = "hcpcs", 
-                              version_var = icd_version,
-                              type_name = visit_type,
-                              date = date_of_serv)
-
-long_data <- long_data %>%
-  rename(version_variable = version)
-
-prepared_data <- prepare_data(dat = long_data,
-                              id = patient_id,
-                              style = "long",
-                              prefix_dx = "dx",
-                              hcpcs = "yes",
-                              prefix_hcpcs = "hcpcs", 
-                              version_var = version_variable,
-                              type_name = type,
-                              date = claim_date)
 ```
 
 ```{r, echo = FALSE}
@@ -108,8 +86,7 @@ head(prepared_data, 10)
 
 Oftentimes, we may be interested in limiting our claims to a specific window, such as the 1-year before diagnosis. To accommodate this, this package includes a function which will merge datasets and limit the claims to that window.
 
-In the example below we do the following: tell it the name of our ID dataset, the name of our claims data, specify our mutual ID variable, specify the variable name in the ID dataset which is our "date of interest", specify the variable in the claims data which is our date of the claim, and specify the time window (in this example, pre only) we are interested in. There is a complementary argument for post (time_post), which is set to infinity as the default. In this example we are only taking the claims that occur within the 60 days before our date of interest as well as all claims after our date of interest. A common extension on this would be if we were interested in only those claims that occurred before diagnosis. This case we could ignore the time_pre argument and set time_post = 0. 
-
+In the example below we do the following: tell it the name of our ID dataset, the name of our claims data, specify our mutual ID variable, specify the variable name in the ID dataset which is our "date of interest", specify the variable in the claims data which is our date of the claim, and specify the time window (in this example, pre only) we are interested in. There is a complementary argument for post (time_post), which is set to infinity as the default. In this example we are only taking the claims that occur within the 60 days before our date of interest as well as all claims after our date of interest. A common extension on this would be if we were interested in only those claims that occurred before diagnosis. In this case we could ignore the time_pre argument and set time_post = 0. 
 
 Note: in this example we ignore date_of_interest10 but this could be used instead as we include both ICD-9 and ICD-10 claims and dates.
 
@@ -178,5 +155,3 @@ nf_data <- nicholsonfortin(dat = limit_data, id = patient_id, dx = dx, version =
 ```{r, echo = FALSE}
 head(nf_data, 5)
 ```
-
-

@@ -14,7 +14,7 @@
 #'     Both: 19)
 #' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
 #'     ICD-10 (10)
-#' @param hcpcs hether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
+#' @param hcpcs whether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 #'
 #' @examples
 #' \dontrun{

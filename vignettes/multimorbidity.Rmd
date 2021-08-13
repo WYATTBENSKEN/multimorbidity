@@ -29,7 +29,7 @@ library(tidyverse)
 
 The multimorbidity package is a simple and transparent one-stop-shop for those working with claims or other administrative health care data who wish to obtain comorbidity, frailty, and/or multimorbidity measures. The goal of the package is to first clean and organize the data in a way that can then be easily used for various algorithms in a uniform and standard format.
 
-# Readin Sample Data
+# Load Sample Data
 
 We've created two sample datasets.
 
@@ -63,7 +63,7 @@ head(id, 5)
 
 The first step is to "prepare" our data for the subsequent algorithms. The end-goal is to have a dataset that has 1 column with a patient ID,  1 column which contains the diagnosis code, and 1 column which will note if it's ICD-9 (9) or ICD-10 (10). There are other variables that may be of interest depending on the specification including type (inpatient or outpatient) and date.
 
-The arguments used here are (in order): telling it the name of our data, specifying the ID variable, noting if it's wide or long (long would be if the data is in our final format), the prefix for the diagnosis columns (dx1, dx2, dx3 would be "dx"), noting if our data include a HCPCS/CPT column, specifying the variable which notes if it's ICD-9 or ICD-10, specifying the variable which tells us the type of visit (inpatient or outpatient), and finally specfying which column is the date.
+The arguments used here are (in order): telling it the name of our data, specifying the ID variable, noting if it's wide or long (long would be if the data is in our final format), the prefix for the diagnosis columns (dx1, dx2, dx3 would be "dx"), noting if our data include a HCPCS/CPT column, specifying the variable which notes if it's ICD-9 or ICD-10, specifying the variable which tells us the type of visit (inpatient or outpatient), and finally specifying which column is the date.
 
 ```{r}
 prepared_data <- prepare_data(dat = claims,

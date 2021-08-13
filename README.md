@@ -16,7 +16,7 @@ measures included in this package have been developed by other
 researchers and are detailed in depth below.
 
 This package is meant to be both user-friendly and transparent. An
-individual should feel comfortable understanding what’s ‘under the hood’
+individual should feel comfortable understanding what’s under the hood
 with these various metrics. Given this, this function has been written
 in a way that makes the code, including specific diagnosis codes,
 accessible.

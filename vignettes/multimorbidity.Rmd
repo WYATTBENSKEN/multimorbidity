@@ -75,6 +75,29 @@ prepared_data <- prepare_data(dat = claims,
                               version_var = icd_version,
                               type_name = visit_type,
                               date = date_of_serv)
+
+long_data <- prepare_data(dat = claims,
+                              id = patient_id,
+                              style = "wide",
+                              prefix_dx = "dx",
+                              hcpcs = "yes",
+                              prefix_hcpcs = "hcpcs", 
+                              version_var = icd_version,
+                              type_name = visit_type,
+                              date = date_of_serv)
+
+long_data <- long_data %>%
+  rename(version_variable = version)
+
+prepared_data <- prepare_data(dat = long_data,
+                              id = patient_id,
+                              style = "long",
+                              prefix_dx = "dx",
+                              hcpcs = "yes",
+                              prefix_hcpcs = "hcpcs", 
+                              version_var = version_variable,
+                              type_name = type,
+                              date = claim_date)
 ```
 
 ```{r, echo = FALSE}

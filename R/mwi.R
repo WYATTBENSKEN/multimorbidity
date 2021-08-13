@@ -15,10 +15,7 @@
 #' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
 #'     ICD-10 (10)
 #'
-#'   @importFrom rlang .data
-#'   @importFrom stats
-#'   @importFrom aggregate
-#'   @export
+#' @export
 
 mwi <- function(dat = NULL,
                 id = NULL,

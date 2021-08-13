@@ -16,10 +16,7 @@
 #'     ICD-10 (10)
 #' @param hcpcs hether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 #'
-#'   @importFrom rlang .data
-#'   @importFrom stats
-#'   @importFrom aggregate
-#'   @export
+#' @export
 
 cfi <- function(dat = NULL,
                 id = NULL,

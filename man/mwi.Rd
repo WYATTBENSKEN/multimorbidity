@@ -17,12 +17,7 @@ mwi(dat = NULL, id = NULL, dx = "dx", version = 19, version_var = NULL)
 Both: 19)}
 
 \item{version_var}{variable which denotes if the diagnoses on that row are ICD-9 (9) or
-ICD-10 (10)
-
-@importFrom rlang .data
-@importFrom stats
-@importFrom aggregate
-@export}
+ICD-10 (10)}
 }
 \description{
 \code{cfi} returns a summary dataset containing the multimorbidity weighted index

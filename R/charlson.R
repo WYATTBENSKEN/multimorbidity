@@ -16,7 +16,6 @@
 #' @param outpatient_two whether or not it should be required for there to be two outpatient
 #'     claims for a diagnosis for a patient to be positively coded with that diagnosis.
 #'
-#'   @importFrom rlang .data
 #'   @export
 
 charlson <- function(dat = NULL,

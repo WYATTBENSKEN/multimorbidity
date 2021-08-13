@@ -1,5 +1,5 @@
 Package: multimorbidity
-Title: Harmonizing various comorbidity, multimorbidity, and frailty measures for health services and population health research.
+Title: Harmonizing various comorbidity, multimorbidity, and frailty measures
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Wyatt",

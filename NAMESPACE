@@ -2,6 +2,7 @@
 
 export("%>%")
 export(cfi)
+export(charlson)
 export(comorbidity_window)
 export(elixhauser)
 export(mwi)

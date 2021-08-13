@@ -457,26 +457,26 @@ charlson <- function(dat = NULL,
 
     dat_ip_sum <- dplyr::rename(dat_ip_sum, "id" = id2)
     dat_ot_sum <- dplyr::rename(dat_ot_sum, "id" = id2)
-    dat_comb <- merge(dat_ip_sum, dat_ot_sum, by = "id")
+    dat_comb <- full_join(dat_ip_sum, dat_ot_sum, by = "id")
 
     dat_comb <- dat_comb %>%
-      dplyr::mutate(charlson_myocar = dplyr::if_else(.data$myocar_ot >= 2 | .data$myocar_ip >=1, 1, 0),
-                    charlson_chf = dplyr::if_else(.data$chf_ot >= 2 | .data$chf_ip >=1, 1, 0),
-                    charlson_periph_vasc = dplyr::if_else(.data$periph_vasc_ot >= 2 | .data$periph_vasc_ip >=1, 1, 0),
-                    charlson_cerebro = dplyr::if_else(.data$cerebro_ot >= 2 | .data$cerebro_ip >=1, 1, 0),
-                    charlson_dementia = dplyr::if_else(.data$dementia_ot >= 2 | .data$dementia_ip >=1, 1, 0),
-                    charlson_chronic_pulm = dplyr::if_else(.data$chronic_pulm_ot >= 2 | .data$chronic_pulm_ip >=1, 1, 0),
-                    charlson_rheum = dplyr::if_else(.data$rheum_ot >= 2 | .data$rheum_ip >=1, 1, 0),
-                    charlson_peptic_ulcer = dplyr::if_else(.data$peptic_ulcer_ot >= 2 | .data$peptic_ulcer_ip >=1, 1, 0),
-                    charlson_mild_liv = dplyr::if_else(.data$mild_liv_ot >= 2 | .data$mild_liv_ip >=1, 1, 0),
-                    charlson_diab_uc = dplyr::if_else(.data$diab_uc_ot >= 2 | .data$diab_uc_ip >=1, 1, 0),
-                    charlson_diab_c = dplyr::if_else(.data$diab_c_ot >= 2 | .data$diab_c_ip >=1, 1, 0),
-                    charlson_hemi_para = dplyr::if_else(.data$hemi_para_ot >= 2 | .data$hemi_para_ip >=1, 1, 0),
-                    charlson_renal = dplyr::if_else(.data$renal_ot >= 2 | .data$renal_ip >=1, 1, 0),
-                    charlson_malig = dplyr::if_else(.data$malig_ot >= 2 | .data$malig_ip >=1, 1, 0),
-                    charlson_mod_sev_liv = dplyr::if_else(.data$mod_sev_liv_ot >= 2 | .data$mod_sev_liv_ip >=1, 1, 0),
-                    charlson_met_solid = dplyr::if_else(.data$met_solid_ot >= 2 | .data$met_solid_ip >=1, 1, 0),
-                    charlson_hiv = dplyr::if_else(.data$hiv_ot >= 2 | .data$hiv_ip >=1, 1, 0))
+      dplyr::mutate(charlson_myocar = dplyr::if_else(.data$myocar_ot >= 2 | .data$myocar_ip >=1, 1, 0, missing = 0),
+                    charlson_chf = dplyr::if_else(.data$chf_ot >= 2 | .data$chf_ip >=1, 1, 0, missing = 0),
+                    charlson_periph_vasc = dplyr::if_else(.data$periph_vasc_ot >= 2 | .data$periph_vasc_ip >=1, 1, 0, missing = 0),
+                    charlson_cerebro = dplyr::if_else(.data$cerebro_ot >= 2 | .data$cerebro_ip >=1, 1, 0, missing = 0),
+                    charlson_dementia = dplyr::if_else(.data$dementia_ot >= 2 | .data$dementia_ip >=1, 1, 0, missing = 0),
+                    charlson_chronic_pulm = dplyr::if_else(.data$chronic_pulm_ot >= 2 | .data$chronic_pulm_ip >=1, 1, 0, missing = 0),
+                    charlson_rheum = dplyr::if_else(.data$rheum_ot >= 2 | .data$rheum_ip >=1, 1, 0, missing = 0),
+                    charlson_peptic_ulcer = dplyr::if_else(.data$peptic_ulcer_ot >= 2 | .data$peptic_ulcer_ip >=1, 1, 0, missing = 0),
+                    charlson_mild_liv = dplyr::if_else(.data$mild_liv_ot >= 2 | .data$mild_liv_ip >=1, 1, 0, missing = 0),
+                    charlson_diab_uc = dplyr::if_else(.data$diab_uc_ot >= 2 | .data$diab_uc_ip >=1, 1, 0, missing = 0),
+                    charlson_diab_c = dplyr::if_else(.data$diab_c_ot >= 2 | .data$diab_c_ip >=1, 1, 0, missing = 0),
+                    charlson_hemi_para = dplyr::if_else(.data$hemi_para_ot >= 2 | .data$hemi_para_ip >=1, 1, 0, missing = 0),
+                    charlson_renal = dplyr::if_else(.data$renal_ot >= 2 | .data$renal_ip >=1, 1, 0, missing = 0),
+                    charlson_malig = dplyr::if_else(.data$malig_ot >= 2 | .data$malig_ip >=1, 1, 0, missing = 0),
+                    charlson_mod_sev_liv = dplyr::if_else(.data$mod_sev_liv_ot >= 2 | .data$mod_sev_liv_ip >=1, 1, 0, missing = 0),
+                    charlson_met_solid = dplyr::if_else(.data$met_solid_ot >= 2 | .data$met_solid_ip >=1, 1, 0, missing = 0),
+                    charlson_hiv = dplyr::if_else(.data$hiv_ot >= 2 | .data$hiv_ip >=1, 1, 0, missing = 0))
 
     dat2 <- dat_comb %>%
       dplyr::select(id, tidyselect::starts_with("charlson"))

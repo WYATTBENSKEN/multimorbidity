@@ -1,6 +1,6 @@
 Package: multimorbidity
-Title: Harmonizing various comorbidity, multimorbidity, and frailty measures
-Version: 0.0.0.9000
+Title: Harmonizing Various Comorbidity, Multimorbidity, and Frailty Measures
+Version: 0.5.0
 Authors@R: 
     person(given = "Wyatt",
            family = "Bensken",

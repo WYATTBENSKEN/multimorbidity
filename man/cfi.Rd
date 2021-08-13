@@ -37,3 +37,9 @@ This function uses data which has been properly prepared to calculate the claims
 As this algorithm was never developed to require two diagnosis codes, and is weighted, we have excluded that feature from this function.
 See full package documentation for additional details. This function is based largely on the code available via the \href{https://dataverse.harvard.edu/dataverse/cfi}{Harvard Dataverse}.
 }
+\examples{
+\dontrun{
+cfi(dat = data, id = patient_id, dx = dx, version = 19, version_var = version)
+}
+
+}

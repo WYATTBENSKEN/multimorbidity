@@ -15,6 +15,11 @@
 #' @param version_var variable which denotes if the diagnoses on that row are ICD-9 (9) or
 #'     ICD-10 (10)
 #'
+#' @examples
+#' \dontrun{
+#' mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
+#' }
+#'
 #' @export
 
 #' @importFrom rlang .data

@@ -15,7 +15,7 @@ comorbidity_window(
 )
 }
 \arguments{
-\item{dat}{claims data}
+\item{dat}{dataset}
 
 \item{id_dat}{dataset with our other identifying variables, this should be 1 row per person}
 
@@ -23,7 +23,7 @@ comorbidity_window(
 
 \item{id_date}{name of the date of interest from the identification dataset, for example a date #'    of diagnosis}
 
-\item{claims_date}{tname for the variable in the claims data (dat) which is the date of the claim}
+\item{claims_date}{name for the variable in the claims data (dat) which is the date of the claim}
 
 \item{time_pre}{number to limit how many days, pre diagnosis, should be included. Default will be
 infinity (all claims)}
@@ -36,4 +36,11 @@ infinity (all claims)}
 \details{
 This function takes prepared data, using the 'prepare_data' function, along with an identification dataset to limit
 the claims of interest to a specific time window.
+}
+\examples{
+\dontrun{
+comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id,
+id_date = date_of_interest9, claims_date = claim_date, time_pre = 60)
+}
+
 }

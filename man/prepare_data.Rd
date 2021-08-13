@@ -17,7 +17,7 @@ prepare_data(
 )
 }
 \arguments{
-\item{dat}{claims dataset}
+\item{dat}{dataset}
 
 \item{style}{long, the default, is one diagnosis column per row whereas wide is multiple diagnosis columns}
 
@@ -43,4 +43,10 @@ package.
 This function takes our raw claims data, in a number of different forms, and prepares it in a way which allows the
 other functions in this package to easily work with it. It is recommended to run this package on all data
 regardless of setup.
+}
+\examples{
+prepare_data(dat = i9_i10_comb, id = patient_id, style = "wide",
+prefix_dx = "dx", hcpcs = "yes", prefix_hcpcs = "hcpcs", version_var = icd_version,
+type_name = visit_type, date = date_of_serv)
+
 }

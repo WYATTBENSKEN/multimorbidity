@@ -7,7 +7,7 @@
 #'    other functions in this package to easily work with it. It is recommended to run this package on all data
 #'    regardless of setup.
 #'
-#' @param dat claims dataset
+#' @param dat dataset
 #' @param style long, the default, is one diagnosis column per row whereas wide is multiple diagnosis columns
 #' @param id unique patient identifier variable name
 #' @param prefix_dx the variable prefix for the diagnosis columns (defaults to "dx"), in quotes
@@ -16,6 +16,11 @@
 #' @param version_var  variable which denotes if the diagnoses on that row are ICD-9 (9) or ICD-10 (10)
 #' @param type_name variable to denote if the claim is inpatient (ip) or outpatient (ot)
 #' @param date variable with the date of the claim
+#'
+#' @examples
+#' prepare_data(dat = i9_i10_comb, id = patient_id, style = "wide",
+#' prefix_dx = "dx", hcpcs = "yes", prefix_hcpcs = "hcpcs", version_var = icd_version,
+#' type_name = visit_type, date = date_of_serv)
 #'
 #' @export
 

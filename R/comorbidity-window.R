@@ -5,14 +5,20 @@
 #' This function takes prepared data, using the 'prepare_data' function, along with an identification dataset to limit
 #' the claims of interest to a specific time window.
 #'
-#' @param dat claims data
+#' @param dat dataset
 #' @param id_dat  dataset with our other identifying variables, this should be 1 row per person
 #' @param id  ID variable which will be used to match and merge
 #' @param id_date name of the date of interest from the identification dataset, for example a date #'    of diagnosis
-#' @param claims_date tname for the variable in the claims data (dat) which is the date of the claim
+#' @param claims_date name for the variable in the claims data (dat) which is the date of the claim
 #' @param time_pre number to limit how many days, pre diagnosis, should be included. Default will be
 #'    infinity (all claims)
 #' @param time_post similar to time_pre, but this will be after the date of interest
+#'
+#' @examples
+#' \dontrun{
+#' comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id,
+#' id_date = date_of_interest9, claims_date = claim_date, time_pre = 60)
+#' }
 #'
 #' @export
 

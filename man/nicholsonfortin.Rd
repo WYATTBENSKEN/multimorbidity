@@ -37,3 +37,10 @@ Fortin Conditions for each patient.
 This function uses data which has been properly prepared to identify and flag the
 Nicholson and Fortin conditions See full package documentation for additional details.
 }
+\examples{
+\dontrun{
+nicholsonfortin(dat = limit_data, id = patient_id, dx = dx, version = 19,
+version_var = version, outpatient_two = "yes")
+}
+
+}

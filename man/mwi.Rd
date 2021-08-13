@@ -28,3 +28,9 @@ This function uses data which has been properly prepared to calculate the multim
 As this algorithm was never developed to require two diagnosis codes, and is weighted, we have excluded that feature from this function.
 See full package documentation for additional details.
 }
+\examples{
+\dontrun{
+mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
+}
+
+}

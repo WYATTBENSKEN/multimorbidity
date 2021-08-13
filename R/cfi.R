@@ -16,6 +16,11 @@
 #'     ICD-10 (10)
 #' @param hcpcs hether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 #'
+#' @examples
+#' \dontrun{
+#' cfi(dat = data, id = patient_id, dx = dx, version = 19, version_var = version)
+#' }
+#'
 #' @export
 
 #' @importFrom rlang .data
@@ -40,7 +45,10 @@ cfi <- function(dat = NULL,
   # Deduplicate files ----
     # As each diagnosis is only used once, we can start by de-duplicating the diagnoses
 
-  dat1 <- unique(dat)
+  dat1 <- dat %>%
+    dplyr::select({{id}}, {{dx}}, {{version_var}})
+
+  dat1 <- unique(dat1)
 
   # CFI ICD-9 ----
 
@@ -65,12 +73,10 @@ cfi <- function(dat = NULL,
   else if (version == 10){
 
     dat1_10 <- dat1 %>%
-      dplyr::filter(version_var == 10)
+      dplyr::filter({{version_var}} == 10)
 
     dat_dx10 <- merge(dat1_10, dx10lookup, all.x=TRUE)
     dat_dx10[is.na(dat_dx10)] <- 0
-    dat_dx10 <- dat_dx10[order(dat_dx10$id2,dat_dx10$dx),]
-
 
   }
 
@@ -94,7 +100,6 @@ cfi <- function(dat = NULL,
     dat_dx10 <- unique(dat1_10)
     dat_dx10 <- merge(dat_dx10, dx10lookup, all.x=TRUE)
     dat_dx10[is.na(dat_dx10)] <- 0
-  #  dat_dx10 <- dat_dx10[order(dat_dx10$id2,dat_dx10$dx),]
 
   }
 
@@ -211,7 +216,6 @@ cfi <- function(dat = NULL,
   }
 
   diseasedata <- unique(diseasedata)
-#  diseasedatasort <- diseasedata[order(diseasedata$id2,diseasedata$disease_number),]
 
   diseasedatasort <- diseasedata
 
@@ -222,7 +226,6 @@ cfi <- function(dat = NULL,
 
   # Calculate frailty scores by summing the weights of records grouped by patient ID. ----
   # ModelIntercept value added to every score. Default score for those with no DX/PX.
-
 
   scores <- diseasedatasort %>%
     dplyr::group_by({{id}}) %>%

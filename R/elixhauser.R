@@ -16,6 +16,12 @@
 #' @param outpatient_two whether or not it should be required for there to be two outpatient
 #'     claims for a diagnosis for a patient to be positively coded with that diagnosis.
 #'
+#' @examples
+#' \dontrun{
+#' elixhauser(dat = data, id = patient_id, dx = dx, version = 19,
+#' version_var = version, outpatient_two = "yes")
+#' }
+#'
 #' @export
 
 #' @importFrom rlang .data
@@ -1791,7 +1797,7 @@ elixhauser <- function(dat = NULL,
 
     dat_ip_sum <- dplyr::rename(dat_ip_sum, "id" = id2)
     dat_ot_sum <- dplyr::rename(dat_ot_sum, "id" = id2)
-    dat_comb <- full_join(dat_ip_sum, dat_ot_sum, by = "id")
+    dat_comb <- dplyr::full_join(dat_ip_sum, dat_ot_sum, by = "id")
 
     dat_comb <- dat_comb %>%
       dplyr::mutate(elix_chf = dplyr::if_else(.data$chf_ot >= 2 | .data$chf_ip >=1, 1, 0, missing = 0),
@@ -1929,7 +1935,7 @@ elixhauser <- function(dat = NULL,
 
     dat_ip_sum <- dplyr::rename(dat_ip_sum, "id" = id2)
     dat_ot_sum <- dplyr::rename(dat_ot_sum, "id" = id2)
-    dat_comb <- full_join(dat_ip_sum, dat_ot_sum, by = "id")
+    dat_comb <- dplyr::full_join(dat_ip_sum, dat_ot_sum, by = "id")
 
     dat_comb <- dat_comb %>%
       dplyr::mutate(elix_aids = dplyr::if_else(.data$aids_ot >= 2 | .data$aids_ip >= 1, 1, 0, missing = 0),

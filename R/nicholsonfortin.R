@@ -144,7 +144,7 @@ nicholsonfortin <- function(dat = NULL,
                     clrd = dplyr::if_else(stringr::str_starts(dx, paste(clrd10_str, sep = "|", collapse = "|")), 1, 0),
                     hyperlipid = dplyr::if_else(stringr::str_starts(dx, paste(hyperlipid10_str, sep = "|", collapse = "|")), 1, 0),
                     cancer = dplyr::if_else(stringr::str_starts(dx, paste(cancer10_str, sep = "|", collapse = "|")), 1, 0),
-                    cvd = dplyr::if_else(stringr::str_starts(dx, paste(cvd9_str, sep = "|", collapse = "|")), 1, 0),
+                    cvd = dplyr::if_else(stringr::str_starts(dx, paste(cvd10_str, sep = "|", collapse = "|")), 1, 0),
                     heartfail = dplyr::if_else(stringr::str_starts(dx, paste(heartfail10_str, sep = "|", collapse = "|")), 1, 0),
                     anxietydepress = dplyr::if_else(stringr::str_starts(dx, paste(anxietydepress10_str, sep = "|", collapse = "|")), 1, 0),
                     arthritis = dplyr::if_else(dx %in% arthritis10 | stringr::str_starts(dx, paste(arthritis10_str, sep = "|", collapse = "|")), 1, 0),
@@ -414,29 +414,29 @@ nicholsonfortin <- function(dat = NULL,
 
     dat_ip_sum <- dplyr::rename(dat_ip_sum, "id" = id2)
     dat_ot_sum <- dplyr::rename(dat_ot_sum, "id" = id2)
-    dat_comb <- merge(dat_ip_sum, dat_ot_sum, by = "id")
+    dat_comb <- full_join(dat_ip_sum, dat_ot_sum, by = "id")
 
     dat_comb <- dat_comb %>%
-      dplyr::mutate(nf_htn = dplyr::if_else(.data$htn_ot >= 2 | .data$htn_ip >= 1, 1, 0),
-                     nf_obesity = dplyr::if_else(.data$obesity_ot >= 2 | .data$obesity_ip >= 1, 1, 0),
-                     nf_diabetes = dplyr::if_else(.data$diabetes_ot >= 2 | .data$diabetes_ip >= 1, 1, 0),
-                     nf_clrd = dplyr::if_else(.data$clrd_ot >= 2 | .data$clrd_ip >= 1, 1, 0),
-                     nf_hyperlipid = dplyr::if_else(.data$hyperlipid_ot >= 2 | .data$hyperlipid_ip >= 1, 1, 0),
-                     nf_cancer = dplyr::if_else(.data$cancer_ot >= 2 | .data$cancer_ip >= 1, 1, 0),
-                     nf_cvd = dplyr::if_else(.data$cvd_ot >= 2 | .data$cvd_ip >= 1, 1, 0),
-                     nf_heartfail = dplyr::if_else(.data$heartfail_ot >= 2 | .data$heartfail_ip >= 1, 1, 0),
-                     nf_anxietydepress = dplyr::if_else(.data$anxietydepress_ot >= 2 | .data$anxietydepress_ip >= 1, 1, 0),
-                     nf_arthritis = dplyr::if_else(.data$arthritis_ot >= 2 | .data$arthritis_ip >= 1, 1, 0),
-                     nf_stroketia = dplyr::if_else(.data$stroketia_ot >= 2 | .data$stroketia_ip >= 1, 1, 0),
-                     nf_thyroid = dplyr::if_else(.data$thyroid_ot >= 2 | .data$thyroid_ip >= 1, 1, 0),
-                     nf_ckd = dplyr::if_else(.data$ckd_ot >= 2 | .data$ckd_ip >= 1, 1, 0),
-                     nf_osteo = dplyr::if_else(.data$osteo_ot >= 2 | .data$osteo_ip >= 1, 1, 0),
-                     nf_dementia = dplyr::if_else(.data$dementia_ot >= 2 | .data$dementia_ip >= 1, 1, 0),
-                     nf_musculo = dplyr::if_else(.data$musculo_ot >= 2 | .data$musculo_ip >= 1, 1, 0),
-                     nf_stomach = dplyr::if_else(.data$stomach_ot >= 2 | .data$stomach_ip >= 1, 1, 0),
-                     nf_colon = dplyr::if_else(.data$colon_ot >= 2 | .data$colon_ip >= 1, 1, 0),
-                     nf_liver = dplyr::if_else(.data$liver_ot >= 2 | .data$liver_ip >= 1, 1, 0),
-                     nf_urinary = dplyr::if_else(.data$urinary_ot >= 2 | .data$urinary_ip >= 1, 1, 0))
+      dplyr::mutate(nf_htn = dplyr::if_else(.data$htn_ot >= 2 | .data$htn_ip >= 1, 1, 0, missing = 0),
+                     nf_obesity = dplyr::if_else(.data$obesity_ot >= 2 | .data$obesity_ip >= 1, 1, 0, missing = 0),
+                     nf_diabetes = dplyr::if_else(.data$diabetes_ot >= 2 | .data$diabetes_ip >= 1, 1, 0, missing = 0),
+                     nf_clrd = dplyr::if_else(.data$clrd_ot >= 2 | .data$clrd_ip >= 1, 1, 0, missing = 0),
+                     nf_hyperlipid = dplyr::if_else(.data$hyperlipid_ot >= 2 | .data$hyperlipid_ip >= 1, 1, 0, missing = 0),
+                     nf_cancer = dplyr::if_else(.data$cancer_ot >= 2 | .data$cancer_ip >= 1, 1, 0, missing = 0),
+                     nf_cvd = dplyr::if_else(.data$cvd_ot >= 2 | .data$cvd_ip >= 1, 1, 0, missing = 0),
+                     nf_heartfail = dplyr::if_else(.data$heartfail_ot >= 2 | .data$heartfail_ip >= 1, 1, 0, missing = 0),
+                     nf_anxietydepress = dplyr::if_else(.data$anxietydepress_ot >= 2 | .data$anxietydepress_ip >= 1, 1, 0, missing = 0),
+                     nf_arthritis = dplyr::if_else(.data$arthritis_ot >= 2 | .data$arthritis_ip >= 1, 1, 0, missing = 0),
+                     nf_stroketia = dplyr::if_else(.data$stroketia_ot >= 2 | .data$stroketia_ip >= 1, 1, 0, missing = 0),
+                     nf_thyroid = dplyr::if_else(.data$thyroid_ot >= 2 | .data$thyroid_ip >= 1, 1, 0, missing = 0),
+                     nf_ckd = dplyr::if_else(.data$ckd_ot >= 2 | .data$ckd_ip >= 1, 1, 0, missing = 0),
+                     nf_osteo = dplyr::if_else(.data$osteo_ot >= 2 | .data$osteo_ip >= 1, 1, 0, missing = 0),
+                     nf_dementia = dplyr::if_else(.data$dementia_ot >= 2 | .data$dementia_ip >= 1, 1, 0, missing = 0),
+                     nf_musculo = dplyr::if_else(.data$musculo_ot >= 2 | .data$musculo_ip >= 1, 1, 0, missing = 0),
+                     nf_stomach = dplyr::if_else(.data$stomach_ot >= 2 | .data$stomach_ip >= 1, 1, 0, missing = 0),
+                     nf_colon = dplyr::if_else(.data$colon_ot >= 2 | .data$colon_ip >= 1, 1, 0, missing = 0),
+                     nf_liver = dplyr::if_else(.data$liver_ot >= 2 | .data$liver_ip >= 1, 1, 0, missing = 0),
+                     nf_urinary = dplyr::if_else(.data$urinary_ot >= 2 | .data$urinary_ip >= 1, 1, 0, missing = 0))
 
     dat2 <- dat_comb %>%
       dplyr::select(id, tidyselect::starts_with("nf"))

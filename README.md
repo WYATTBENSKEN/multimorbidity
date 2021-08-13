@@ -4,6 +4,9 @@
 # multimorbidity
 
 <!-- badges: start -->
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/multimorbidity)](https://cran.r-project.org/package=multimorbidity)
+![CRAN\_Download\_Counter](http://cranlogs.r-pkg.org/badges/grand-total/multimorbidity)
 <!-- badges: end -->
 
 The goal of `multimorbidity` is to create a single package which can
@@ -28,7 +31,7 @@ see the documentation or the vignette.
 
 There is currently no released version of `multimorbidity` on CRAN.
 
-The development version can be downloaded from
+The development version of `multimorbidity` can be downloaded from
 [GitHub](https://github.com/) with:
 
 ``` r

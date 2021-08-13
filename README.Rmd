@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 # multimorbidity
 
 <!-- badges: start -->
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/multimorbidity)](https://cran.r-project.org/package=multimorbidity)
+![CRAN\_Download\_Counter](http://cranlogs.r-pkg.org/badges/grand-total/multimorbidity)
 <!-- badges: end -->
 
 The goal of `multimorbidity` is to create a single package which can take original claims data, with the ability to clean and organize them to a simple format, which can then be immediately used to obtain any of a number of comorbidity, frailty, and multimorbidity measures. This package is meant to be a simple and transparent one-stop-shop for those working with claims or other administrative health care data. The measures included in this package have been developed by other researchers and are detailed in depth below.
@@ -29,7 +31,7 @@ For examples of the various functions included in this package, please see the d
 
 There is currently no released version of `multimorbidity` on CRAN.
 
-The development version can be downloaded from [GitHub](https://github.com/) with:
+The development version of `multimorbidity` can be downloaded from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

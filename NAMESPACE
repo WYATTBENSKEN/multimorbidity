@@ -3,6 +3,7 @@
 export("%>%")
 export(cfi)
 export(comorbidity_window)
+export(elixhauser)
 export(mwi)
 export(nicholsonfortin)
 export(prepare_data)

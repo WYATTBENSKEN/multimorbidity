@@ -35,6 +35,9 @@ prepare_data(
 
 \item{date}{variable with the date of the claim}
 }
+\value{
+dataframe with multiple rows per patient, which has re-structured their claims
+}
 \description{
 \code{prepare_data} returns a dataset which has been transformed and prepared for subsequent functions in this
 package.

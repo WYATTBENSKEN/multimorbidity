@@ -28,6 +28,9 @@ ICD-10 (10)}
 
 \item{hcpcs}{whether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)}
 }
+\value{
+dataframe with one row per patient, and a column for their patient id and a column with their frailty index.
+}
 \description{
 \code{cfi} returns a summary dataset containing the deficit-accumulation frailty index
 for each patient.
@@ -38,8 +41,7 @@ As this algorithm was never developed to require two diagnosis codes, and is wei
 See full package documentation for additional details. This function is based largely on the code available via the \href{https://dataverse.harvard.edu/dataverse/cfi}{Harvard Dataverse}.
 }
 \examples{
-\dontrun{
-cfi(dat = data, id = patient_id, dx = dx, version = 19, version_var = version)
-}
+cfi(dat = prepared_data, id = patient_id, dx = dx, version = 19, version_var = version)
+
 
 }

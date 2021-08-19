@@ -35,7 +35,6 @@ elixhauser <- function(dat = NULL,
                        outpatient_two = "no"){
 
   id2 <- rlang::quo_name(rlang::enquo(id))
-  id3 <- enquo(id)
 
   # Elixhauser ICD-9 ----
 

@@ -21,7 +21,7 @@ comorbidity_window(
 
 \item{id}{ID variable which will be used to match and merge}
 
-\item{id_date}{name of the date of interest from the identification dataset, for example a date #'    of diagnosis}
+\item{id_date}{name of the date of interest from the identification dataset, for example a date of diagnosis}
 
 \item{claims_date}{name for the variable in the claims data (dat) which is the date of the claim}
 
@@ -29,6 +29,9 @@ comorbidity_window(
 infinity (all claims)}
 
 \item{time_post}{similar to time_pre, but this will be after the date of interest}
+}
+\value{
+dataframe with which has limited the claims to a specific window
 }
 \description{
 \code{comorbidity_window} returns a dataset of claims which fall within a specific timeframe.
@@ -38,9 +41,8 @@ This function takes prepared data, using the 'prepare_data' function, along with
 the claims of interest to a specific time window.
 }
 \examples{
-\dontrun{
 comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id,
 id_date = date_of_interest9, claims_date = claim_date, time_pre = 60)
-}
+
 
 }

@@ -17,7 +17,7 @@
 #' @return dataframe with which has limited the claims to a specific window
 #'
 #' @examples
-#' comorbidity_window(id_dat = prepared_data, dat = prepared_data, id = patient_id,
+#' comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id,
 #' id_date = date_of_interest9, claims_date = claim_date, time_pre = 60)
 #'
 #'

@@ -29,8 +29,7 @@ As this algorithm was never developed to require two diagnosis codes, and is wei
 See full package documentation for additional details.
 }
 \examples{
-\dontrun{
-mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
-}
+mwi(dat = prepared_data, id = patient_id, dx = dx, version = 9, version_var = version)
+
 
 }

@@ -29,6 +29,10 @@ ICD-10 (10)}
 \item{outpatient_two}{whether or not it should be required for there to be two outpatient
 claims for a diagnosis for a patient to be positively coded with that diagnosis.}
 }
+\value{
+dataframe with one row per patient, and a column for their patient id, a column with each
+Nicholson/Fortin comorbidity
+}
 \description{
 \code{elixhauser} returns a summary dataset containing the Nicholson and
 Fortin Conditions for each patient.
@@ -38,9 +42,8 @@ This function uses data which has been properly prepared to identify and flag th
 Nicholson and Fortin conditions See full package documentation for additional details.
 }
 \examples{
-\dontrun{
-nicholsonfortin(dat = limit_data, id = patient_id, dx = dx, version = 19,
+nicholsonfortin(dat = prepared_data, id = patient_id, dx = dx, version = 19,
 version_var = version, outpatient_two = "yes")
-}
+
 
 }

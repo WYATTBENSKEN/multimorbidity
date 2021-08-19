@@ -16,9 +16,8 @@
 #'     ICD-10 (10)
 #'
 #' @examples
-#' \dontrun{
-#' mwi(dat = limit_data, id = patient_id, dx = dx, version = 9, version_var = version)
-#' }
+#' mwi(dat = prepared_data, id = patient_id, dx = dx, version = 9, version_var = version)
+#'
 #'
 #' @export
 
@@ -452,6 +451,7 @@ mwi <- function(dat = NULL,
     stop("The Multmorbidity Weighted Index has only been developed for ICD-9. Please limit your data to those claims with ICD-9 diagnosis codes, and use version = 9")
   }
 
+  dat4 <- dplyr::rename(dat4, "id" = id2)
 
 return(dat4)
 

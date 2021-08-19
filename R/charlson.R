@@ -16,11 +16,13 @@
 #' @param outpatient_two whether or not it should be required for there to be two outpatient
 #'     claims for a diagnosis for a patient to be positively coded with that diagnosis.
 #'
+#' @return dataframe with one row per patient, and a column for their patient id, a column
+#'     with each Charlson comorbidity, and a column with their Charlson score
+#'
 #' @examples
-#' \dontrun{
-#' charlson(dat = data, id = patient_id, dx = dx, version = 19,
+#' charlson(dat = prepared_data, id = patient_id, dx = dx, version = 19,
 #' version_var = version, outpatient_two = "yes")
-#' }
+#'
 #'
 #' @export
 

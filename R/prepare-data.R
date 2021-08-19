@@ -17,6 +17,8 @@
 #' @param type_name variable to denote if the claim is inpatient (ip) or outpatient (ot)
 #' @param date variable with the date of the claim
 #'
+#' @return dataframe with multiple rows per patient, which has re-structured their claims
+#'
 #' @examples
 #' prepare_data(dat = i9_i10_comb, id = patient_id, style = "wide",
 #' prefix_dx = "dx", hcpcs = "yes", prefix_hcpcs = "hcpcs", version_var = icd_version,

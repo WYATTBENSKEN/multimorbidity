@@ -8,17 +8,18 @@
 #' @param dat dataset
 #' @param id_dat  dataset with our other identifying variables, this should be 1 row per person
 #' @param id  ID variable which will be used to match and merge
-#' @param id_date name of the date of interest from the identification dataset, for example a date #'    of diagnosis
+#' @param id_date name of the date of interest from the identification dataset, for example a date of diagnosis
 #' @param claims_date name for the variable in the claims data (dat) which is the date of the claim
 #' @param time_pre number to limit how many days, pre diagnosis, should be included. Default will be
 #'    infinity (all claims)
 #' @param time_post similar to time_pre, but this will be after the date of interest
 #'
+#' @return dataframe with which has limited the claims to a specific window
+#'
 #' @examples
-#' \dontrun{
-#' comorbidity_window(id_dat = id, dat = prepared_data, id = patient_id,
+#' comorbidity_window(id_dat = prepared_data, dat = prepared_data, id = patient_id,
 #' id_date = date_of_interest9, claims_date = claim_date, time_pre = 60)
-#' }
+#'
 #'
 #' @export
 

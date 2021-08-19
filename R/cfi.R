@@ -7,6 +7,8 @@
 #'     As this algorithm was never developed to require two diagnosis codes, and is weighted, we have excluded that feature from this function.
 #'     See full package documentation for additional details. This function is based largely on the code available via the [Harvard Dataverse](https://dataverse.harvard.edu/dataverse/cfi).
 #'
+#' @return dataframe with one row per patient, and a column for their patient id and a column with their frailty index.
+#'
 #' @param dat dataset which has been properly prepared using 'prepare_data()'
 #' @param id variable of the unique patient identifier
 #' @param dx the column with the diagnoses and procedures (defaults to 'dx')
@@ -17,9 +19,8 @@
 #' @param hcpcs whether or not HCPCS variables are included ("yes" or "no", where "yes" is the default)
 #'
 #' @examples
-#' \dontrun{
-#' cfi(dat = data, id = patient_id, dx = dx, version = 19, version_var = version)
-#' }
+#' cfi(dat = prepared_data, id = patient_id, dx = dx, version = 19, version_var = version)
+#'
 #'
 #' @export
 
@@ -234,6 +235,8 @@ cfi <- function(dat = NULL,
 
   scores$x <- scores$x + ModelIntercept
   colnames(scores) <- c(id2, 'frailty_index')
+
+  scores <- dplyr::rename(scores, "id" = id2)
 
   return(scores)
 

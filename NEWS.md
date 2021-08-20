@@ -1,6 +1,6 @@
 # multimorbidity 0.5.0
 
-* The first CRAN release to share with collaborators for use.
+* The first release, available on CRAN on 20201-08-20, to share with collaborators for use.
 
 # multimorbidity 0.0.0.9000
 

@@ -29,7 +29,11 @@ see the documentation or the vignette.
 
 ## Installation
 
-There is currently no released version of `multimorbidity` on CRAN.
+You can install `multimorbidity` from CRAN with:
+
+``` r
+install.packages("multimorbidity")
+```
 
 The development version of `multimorbidity` can be downloaded from
 [GitHub](https://github.com/) with:

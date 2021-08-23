@@ -1,3 +1,7 @@
+# multimorbidity 0.5.0.900
+
+* Updating the vignette to not hide important steps
+
 # multimorbidity 0.5.0
 
 * The first release, available on CRAN on 20201-08-20, to share with collaborators for use.

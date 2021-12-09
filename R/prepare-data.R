@@ -78,6 +78,7 @@ prepare_data <- function(dat = NULL,
   check_date(dat2$claim_date)
 
   dat2 <- dplyr::filter(dat2, !is.na(.data$dx)) # removes any missing diagnosis rows
+  dat2 <- dplyr::filter(dat2, .data$dx != "") # removes empty string rows
 
   return(dat2)
 

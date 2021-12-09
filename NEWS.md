@@ -1,6 +1,7 @@
 # multimorbidity 0.5.0.900
 
 * Updating the vignette to not hide important steps
+* Updating prepare_data() to drop any rows (after transposing) that have missing or empty values, this will decrease the file size.
 
 # multimorbidity 0.5.0
 

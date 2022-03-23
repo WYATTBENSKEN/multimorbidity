@@ -15,7 +15,7 @@
 #'   \item{dx4}{fourth diagnosis}
 #'   \item{dx5}{fifth diagnosis}
 #'   \item{hcpcs}{HCPCS code}
-#'   \item{icd_version}{Which version of ICD the row is. 9 = ICD-9, 0 = ICD-10}
+#'   \item{icd_version}{Which version of ICD the row is. 9 = ICD-9, 10 = ICD-10}
 #' }
 #' @source This was created by the package author.
 #'

@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   \usepackage[utf8]{inputenc}
-  % \VignetteDepends{devtools}
+  % \VignetteDepends{}
 ---
 
 ```{r, include = FALSE}
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, include = FALSE}
 
-devtools::load_all(".")
+library(multimorbidity)
 
 ```
 

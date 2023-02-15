@@ -36,9 +36,7 @@ Imports:
     rlang,
     tidyselect,
     tidyr,
-    devtools,
     sqldf,
-    stats
 URL: https://github.com/WYATTBENSKEN/multimorbidity
 BugReports: https://github.com/WYATTBENSKEN/multimorbidity/issues
 Suggests: 

@@ -1,3 +1,7 @@
+# multimorbidity 0.5.1
+
+* Fixing dependencies
+
 # multimorbidity 0.5.900
 
 * Updating the vignette to not hide important steps

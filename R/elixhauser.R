@@ -849,7 +849,7 @@ elixhauser <- function(dat = NULL,
 
     dat1 <- dat1 %>%
       dplyr::mutate(diab_uc = dplyr::if_else(.data$diab_c == 1, 0, .data$diab_uc),
-                    htn_uc = dplyr::if_else(.data$htn_c == 1, 0, .data$htn_c),
+                    htn_uc = dplyr::if_else(.data$htn_c == 1, 0, .data$htn_uc),
                     cancer_solid = dplyr::if_else(.data$cancer_mets == 1, 0, .data$cancer_solid),
                     cancer_insitu = dplyr::if_else(.data$cancer_mets == 1, 0, .data$cancer_insitu),
                     cancer_insitu = dplyr::if_else(.data$cancer_solid == 1, 0, .data$cancer_insitu),

@@ -1,3 +1,11 @@
+# multimorbidity 0.5.3
+
+* The Elixhauser program was corrected to ensure that the "if_else" statement for hypertension complications references the "uc" instead of "c" variable.
+
+# multimorbidity 0.5.2
+
+* The Elixhauser codes have been corrected as 33394 should have been 394.
+
 # multimorbidity 0.5.1
 
 * Fixing dependencies
